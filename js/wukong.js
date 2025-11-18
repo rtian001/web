@@ -1,7 +1,7 @@
 if (location.search == '') {
   location.search = '?size=3x4';
 }
-const host = 'https://img.128877.xyz/';
+const host = 'https://s.128877.xyz/images/';
 var imgs = [{
   name: 'wukong1.jpg',
   width: 3840,
