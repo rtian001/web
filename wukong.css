@@ -1,0 +1,1 @@
+div,body{margin:0;padding:0;overflow:hidden;}#game{width:100vw;height:100vh;overflow:hidden;transition:all 0.3s ease;background-repeat:no-repeat;}.block{position:absolute;box-sizing:border-box;transition:all 0.3s ease;border:2px solid transparent;background-repeat:no-repeat;}.gamesboder{border-color:#ddd;border-radius:10px;}
