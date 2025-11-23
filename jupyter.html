@@ -1,0 +1,391 @@
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Jupyter Server</title>
+        <link id="favicon" rel="shortcut icon" type="image/x-icon"
+            href="https://notebook.zeabur.app/static/favicon.ico?v=50afa725b5de8b00030139d09b38620224d4e7dba47c07ef0e86d4643f30c9bfe6bb7e1a4a1c561aa32834480909a4b6fe7cd1e17f7159330b6b5914bf45a880">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /* 全局样式重置 */
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                line-height: 1.3;
+                color: #333;
+                font-size: 14px;
+                min-height: 100vh;
+                transition: background-color 0.3s ease;
+            }
+
+            /* 头部样式 */
+            #header {
+                background-color: #ffffff;
+                border-bottom: 1px solid #e0e0e0;
+                padding: 1rem 0;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+
+            #header-container {
+                max-width: 700px;
+                margin: 0 auto;
+                padding: 0 1rem;
+                text-align: center;
+            }
+
+            #jupyter_server a {
+                display: inline-block;
+            }
+
+            #jupyter_server img {
+                height: 32px;
+                width: auto;
+            }
+
+            .header-bar {
+                height: 3px;
+                /* background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%); */
+            }
+
+            /* 主内容区域 */
+            #site {
+                padding: 2rem 0;
+            }
+
+            #jupyter-main-app {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 1rem;
+            }
+
+            /* 登录表单样式 */
+            .navbar {
+                margin: 0;
+            }
+
+            .navbar-inner {
+                background: none;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .center-nav {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .navbar-form {
+                margin: 0;
+                padding: 0;
+            }
+
+            .navbar-form label {
+                font-size: 1rem;
+                font-weight: 500;
+                margin-right: 0.75rem;
+                color: #333;
+            }
+
+            .form-control {
+                width: 250px;
+                height: 40px;
+                padding: 0.5rem 0.75rem;
+                font-size: 1rem;
+                color: #495057;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                margin-right: 0.75rem;
+            }
+
+            .form-control:focus {
+                color: #495057;
+                background-color: #fff;
+                border-color: #80bdff;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+
+            /* 按钮样式 */
+            .btn {
+                display: inline-block;
+                font-weight: 500;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                user-select: none;
+                border: 1px solid transparent;
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                border-radius: 4px;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+            }
+
+            .btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+                transition: all 0.5s ease;
+                z-index: -1;
+            }
+
+            .btn:hover::before {
+                left: 100%;
+            }
+
+            .btn-default {
+                color: #111;
+                /* background-color: #007bff; */
+                /* border-color: #007bff; */
+            }
+
+            .btn-default:hover {
+                color: #fff;
+                background-color: #0069d9;
+                border-color: #0062cc;
+            }
+
+            .btn-default:focus,
+            .btn-default.focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+            }
+
+            .btn-default:active,
+            .btn-default.active {
+                background-color: #0062cc;
+                border-color: #005cbf;
+            }
+
+            /* 信息区域样式 */
+            .rendered_html {
+                background-color: #ffffff;
+                border-radius: 8px;
+                padding: 1rem;
+            }
+
+            .rendered_html h3 {
+                color: #333;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                font-weight: 500;
+            }
+
+            .rendered_html h4 {
+                color: #495057;
+                font-size: 1.2rem;
+                margin-bottom: 0.75rem;
+                font-weight: 500;
+            }
+
+            .rendered_html p {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-weight: 400;
+                font-size: 13px;
+                margin-bottom: 0.8rem;
+            }
+
+            .rendered_html pre {
+                background-color: #f8f9fa;
+                padding: 0.5rem;
+                border-radius: 4px;
+                border: 1px solid #e9ecef;
+                overflow-x: auto;
+                font-size: 12px;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+            }
+
+            .rendered_html a {
+                color: #007bff;
+                text-decoration: none;
+                transition: color 0.15s ease-in-out;
+            }
+
+            .rendered_html a:hover {
+                color: #0056b3;
+                text-decoration: underline;
+            }
+
+            /* 设置密码表单样式 */
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+                color: #333;
+            }
+
+            .form-group .form-control {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            /* NoScript提示样式 */
+            #noscript {
+                background-color: #fff3cd;
+                color: #856404;
+                padding: 1rem;
+                text-align: center;
+                border: 1px solid #ffeaa7;
+                border-radius: 4px;
+                margin: 1rem;
+            }
+
+            /* 响应式设计 */
+            @media (max-width: 768px) {
+                .center-nav {
+                    padding: 1.5rem;
+                }
+
+                .navbar-form {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+
+                .navbar-form label {
+                    margin-bottom: 0.5rem;
+                }
+
+                .form-control {
+                    width: 100%;
+                    margin-right: 0;
+                    margin-bottom: 0.75rem;
+                }
+
+                .btn {
+                    width: 100%;
+                }
+
+                .rendered_html {
+                    padding: 1.5rem;
+                }
+
+                #jupyter_server img {
+                    height: 28px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .center-nav {
+                    padding: 1rem;
+                }
+
+                .rendered_html {
+                    padding: 1rem;
+                }
+
+                .rendered_html h3 {
+                    font-size: 1.3rem;
+                }
+
+                .rendered_html h4 {
+                    font-size: 1.1rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body class="" dir="ltr">
+        <noscript>
+            <div id='noscript'> Jupyter Server requires JavaScript.<br> Please enable it to proceed. </div>
+        </noscript>
+        <div id="header" role="navigation" aria-label="Top Menu">
+            <div id="header-container" class="container">
+                <div id="jupyter_server" class="nav navbar-brand"><a href="/lab" title="dashboard">
+                        <img src="https://notebook.zeabur.app/static/logo/logo.png?v=a2a176ee3cee251ffddf5fa21fe8e43727a9e5f87a06f9c91ad7b776d9e9d3d5e0159c16cc188a3965e00375fb4bc336c16067c688f5040c0c2d4bfdb852a9e4"
+                            alt="Jupyter Server">
+                    </a></div>
+            </div>
+            <div class="header-bar"></div>
+        </div>
+        <div id="site">
+            <div id="jupyter-main-app" class="container">
+                <div class="row">
+                    <div class="navbar col-sm-8">
+                        <div class="navbar-inner">
+                            <div class="container">
+                                <div class="center-nav">
+                                    <form action="/login?next=%2Flab" method="post" class="navbar-form pull-left">
+                                        <input type="hidden" name="_xsrf"
+                                            value="2|177a6681|1ee6dce94a3fd9b4d48ab64551feae2c|1762750975">
+                                        <label for="password_input"><strong>Password or token:</strong></label>
+                                        <input type="password" name="password" id="password_input" class="form-control">
+                                        <button type="submit" class="btn btn-default" id="login_submit">Log in</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-sm-offset-3 text-left rendered_html">
+                    <h3> Token authentication is enabled </h3>
+                    <p> If no password has been configured, you need to open the server with its login token in the URL,
+                        or paste it above. This requirement will be lifted if you <b><a
+                                href="https://jupyter-server.readthedocs.io/en/latest/operators/public-server.html">
+                                enable a password</a></b>. </p>
+                    <p> The command: </p>
+                    <pre>jupyter server list</pre> will show you the URLs of running servers with their tokens, which
+                    you can copy and paste into your browser. For example: <p></p>
+                    <pre>Currently running servers:
+http://localhost:8888/?token=c8de56fa... :: /Users/you/notebooks
+</pre>
+                    <p> or you can paste just the token value into the password field on this page. </p>
+                    <p> See <b><a href="https://jupyter-server.readthedocs.io/en/latest/operators/public-server.html">
+                                the documentation on how to enable a password</a>
+                        </b> in place of token authentication, if you would like to avoid dealing with random tokens.
+                    </p>
+                    <p> Cookies are required for authenticated access to the Jupyter server. </p>
+                    <h3>Setup a Password</h3>
+                    <p> You can also setup a password by entering your token and a new password on the fields below:</p>
+                    <form action="/login?next=%2Flab" method="post" class="">
+                        <div class="form-group">
+                            <label for="token_input">
+                                <h4>Token</h4>
+                            </label>
+                            <input type="password" name="password" id="token_input" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password_input">
+                                <h4>New Password</h4>
+                            </label>
+                            <input type="password" name="new_password" id="new_password_input" class="form-control"
+                                required="">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" id="login_new_pass_submit">Log in and set new
+                                password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
