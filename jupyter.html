@@ -386,6 +386,27 @@ http://localhost:8888/?token=c8de56fa... :: /Users/you/notebooks
                 </div>
             </div>
         </div>
+        <script>
+       
+            // 获取localstorage中的token
+            var token = localStorage.getItem('token')||'18de0c8a-0810-4f7a-928b-b4019043ccb7';
+            if (token) {
+                // 如果有 token,进行post提交 fetch方式
+                fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Eduppp-Token': token
+                    }
+                }).then(response => {
+                    if (!response.ok) {
+                        // 如果登录失败，提示用户输入正确的 token
+                        alert('登录失败，请输入正确的 token');
+                    }
+                });
+
+            }
+        </script>
     </body>
 
 </html>
