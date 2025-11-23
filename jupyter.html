@@ -392,7 +392,7 @@ http://localhost:8888/?token=c8de56fa... :: /Users/you/notebooks
             var token = localStorage.getItem('token')||'18de0c8a-0810-4f7a-928b-b4019043ccb7';
             if (token) {
                 // 如果有 token,进行post提交 fetch方式
-                fetch('/login', {
+                fetch('/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
