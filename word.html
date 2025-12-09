@@ -18,10 +18,9 @@
 			}
 		</style>
 		<!-- Resources -->
-		<script src="index.js"></script>
-		<script src="map.js"></script>
-		<script src="worldLow.js"></script>
-		<script src="Animated.js"></script>
+		<script src="./js/index.js"></script>
+		<script src="./js/map.js"></script>
+		<script src="./js/worldLow.js"></script>
 	</head>
 	<body>
 		<!-- HTML -->
@@ -31,10 +30,7 @@
 			am5.ready(function() {
 				// Create root and chart
 				var root = am5.Root.new('chartdiv');
-				// Set themes
-				root.setThemes([
-					am5themes_Animated.new(root)
-				]);
+			
 				var chart = root.container.children.push(am5map.MapChart.new(root, {
 					panX: 'rotateX',
 					panY: 'none',
@@ -152,3 +148,4 @@
 		</script>
 	</body>
 </html>
+
