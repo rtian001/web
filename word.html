@@ -5,17 +5,23 @@
 		<title></title>
 		<!-- Styles -->
 		<style>
+			body {
+				display: flex;
+				justify-content: center;
+			}
+
 			#chartdiv {
-				width: 100vw;
-				max-width: 100vw;
-				height:90dvh
+				flex: 1;
+				width: 90vw;
+				max-width: 90vw;
+				height: 90dvh
 			}
 		</style>
 		<!-- Resources -->
-		<script src="./js/index.js"></script>
-		<script src="./js/map.js"></script>
-		<script src="./js/worldLow.js"></script>
-		<script src="./js/Animated.js"></script>
+		<script src="index.js"></script>
+		<script src="map.js"></script>
+		<script src="worldLow.js"></script>
+		<script src="Animated.js"></script>
 	</head>
 	<body>
 		<!-- HTML -->
@@ -32,10 +38,17 @@
 				var chart = root.container.children.push(am5map.MapChart.new(root, {
 					panX: 'rotateX',
 					panY: 'none',
-					// paddingBottom: 50,
-					// paddingTop: 50,
-					// paddingLeft: 50,
-					// paddingRight: 50,
+					zoomLevel: 1,
+					wheelY: 'none',
+					paddingBottom: 20,
+					paddingTop: 20,
+					paddingLeft: 20,
+					paddingRight: 20,
+					// zoomStep:1,
+					// homeRotationX:0,
+					// homeRotationY:0,
+					// homeZoomLevel:1,
+					// homeGeoPoint:{longitude:0,latitude: 0},
 					projection: am5map.geoNaturalEarth1()
 				}));
 				// Create polygon series
@@ -68,9 +81,6 @@
 				// 	strokeWidth: 1,
 				// 	strokeOpacity: 0.9
 				// });
-				
-				
-				
 				var backgroundSeries = chart.series.unshift(am5map.MapPolygonSeries.new(root, {}));
 				backgroundSeries.mapPolygons.template.setAll({
 					fill: am5.color(0xedf7fa),
@@ -92,10 +102,12 @@
 					paddingBottom: 5,
 					paddingLeft: 8,
 					background: am5.RoundedRectangle.new(root, {
-						fill: am5.color(0xffffff),
+						fill: am5.color('#fff'),
 						fillOpacity: 0.3
 					})
 				}));
+				var rotationY = 0;
+				var lastprojection = 'geoNaturalEarth1';
 
 				function createButton(text, projection) {
 					var button = buttons.children.push(am5.Button.new(root, {
@@ -111,11 +123,24 @@
 					}));
 					button.events.on('click', function() {
 						chart.set('projection', projection);
+						let Y = 0;
 						if (text == 'geoOrthographic') {
 							chart.set('panY', 'rotateY');
+							Y = rotationY;
 						} else {
-							chart.set('panY', 'none');
+							if (lastprojection == 'geoOrthographic') {
+								chart.set('panY', 'none');
+								rotationY = chart.get('rotationY');
+							};
+							Y = 0;
 						}
+						chart.animate({
+							key: 'rotationY',
+							to: Y,
+							duration: 500,
+							easing: am5.ease.inOut(am5.ease.cubic)
+						});
+						lastprojection = text;
 					});
 				}
 				createButton('geoEqualEarth', am5map.geoEqualEarth());
@@ -126,5 +151,4 @@
 			}); // end am5.ready()
 		</script>
 	</body>
-
 </html>
