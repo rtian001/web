@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<!-- Styles -->
+		<style>
+			#chartdiv {
+				width: 500px;
+				height: 500px;
+			}
+		</style>
+		<!-- Resources -->
+		<script src="index.js"></script>
+		<script src="map.js"></script>
+		<script src="worldLow.js"></script>
+		<script src="countries2.js"></script>
+		<script src="exporting.js"></script>
+		<!-- <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script> -->
+	</head>
+	<body>
+		<!-- <script src="https://www.amcharts.com/lib/5/geodata/worldHigh.js"></script> -->
+		<!-- HTML -->
+		<div id="chartdiv"></div>
+		<!-- Chart code -->
+		<script>
+			am5.ready(function() {
+				// Create root element
+				// https://www.amcharts.com/docs/v5/getting-started/#Root_element
+				var root = am5.Root.new('chartdiv');
+				// Set themes
+				// https://www.amcharts.com/docs/v5/concepts/themes/
+				// root.setThemes([
+				// 	am5themes_Animated.new(root)
+				// ]);
+				// Create the map chart
+				// https://www.amcharts.com/docs/v5/charts/map-chart/
+				var chart = root.container.children.push(am5map.MapChart.new(root, {
+					panX: 'rotateX',
+					panY: 'rotateY',
+					// wheelX:'none',
+					// wheelY:'none',
+					projection: am5map.geoOrthographic(),
+					// paddingBottom: 20,
+					// paddingTop: 20,
+					// paddingLeft: 20,
+					// paddingRight: 20,
+				}));
+				// chart.set('centerMapOnZoomOut', true);
+				// Create main polygon series for countries
+				// https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/
+				var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+					geoJSON: am5geodata_worldLow,
+				}));
+				polygonSeries.mapPolygons.template.setAll({
+					fill: am5.color('#aaa'),
+					stroke: am5.color('#ddd'),
+					strokeWidth: 0.5,
+					tooltipText: '{name}-{id}',
+					toggleKey: 'active',
+					interactive: true
+				});
+				polygonSeries.mapPolygons.template.states.create('hover', {
+					// fill: root.interfaceColors.get('primaryButtonHover')
+					fill: am5.color('#595')
+				});
+				polygonSeries.mapPolygons.template.states.create('active', {
+					// fill: root.interfaceColors.get('primaryButtonHover')
+					fill: am5.color('#363')
+				});
+				// Create series for background fill
+				// https://www.amcharts.com/docs/v5/charts/map-chart/map-polygon-series/#Background_polygon
+			
+				var backgroundSeries = chart.series.unshift(am5map.MapPolygonSeries.new(root, {}));
+				backgroundSeries.mapPolygons.template.setAll({
+					fill: am5.color('#aaa'),
+					fillOpacity: 0.1,
+					strokeOpacity: 0
+				});
+				backgroundSeries.data.push({
+					geometry: am5map.getGeoRectangle(90, 180, -90, -180)
+				});
+				//添加经纬度
+				var graticuleSeries = chart.series.unshift(am5map.GraticuleSeries.new(root, {
+					step: 30
+				}));
+				graticuleSeries.mapLines.template.set('strokeOpacity', 0.2);
+				// Set up events
+				var previousPolygon;
+				polygonSeries.mapPolygons.template.on('active', function(active, target) {
+					if (previousPolygon && previousPolygon != target) {
+						previousPolygon.set('active', false);
+					}
+					if (target.get('active')) {
+						selectCountry(target.dataItem.get('id'));
+					}
+					previousPolygon = target;
+				});
+
+				function selectCountry(id) {
+					var dataItem = polygonSeries.getDataItemById(id);
+					var target = dataItem.get('mapPolygon');
+					if (target) {
+						var centroid = target.geoCentroid();
+						if (centroid) {
+							chart.animate({
+								key: 'rotationX',
+								to: -centroid.longitude,
+								duration: 1000,
+								easing: am5.ease.inOut(am5.ease.cubic)
+							});
+							chart.animate({
+								key: 'rotationY',
+								to: -centroid.latitude + 6,
+								duration: 1000,
+								easing: am5.ease.inOut(am5.ease.cubic)
+							});
+						}
+					}
+				}
+		
+				// 设置导出图像
+				var exporting = am5plugins_exporting.Exporting.new(root, {
+					menu: am5plugins_exporting.ExportingMenu.new(root, {})
+				});
+				//导出图像时暂时修改图像尺寸；导出后恢复
+				exporting.events.on('exportstarted', function() {
+					chart.set('paddingBottom',20);
+					chart.set('paddingTop',20);
+					chart.set('paddingLeft',20);
+					chart.set('paddingRight',20);
+					root.dom.style.width = '600px';
+					root.dom.style.height = '600px';
+					root.resize();
+				});
+				exporting.events.on('exportfinished', function() {
+					chart.set('paddingBottom',0);
+					chart.set('paddingTop',0);
+					chart.set('paddingLeft',0);
+					chart.set('paddingRight',0);
+					root.dom.style.width = '';
+					root.dom.style.height = '';
+					root.resize();
+				});
+				
+			
+				// Uncomment this to pre-center the globe on a country when it loads
+				// polygonSeries.events.on('datavalidated', function() {
+				// 	var china = polygonSeries.getDataItemById('CN');
+				// 	if (china && china.get('mapPolygon')) {
+				// 		var polygon = china.get('mapPolygon');
+				// 		polygon.set('active', true); // 高亮
+				// 		// polygon.set('interactive', true); // 高亮
+				// 	}
+				// 	selectCountry('CN');
+				// });
+				
+				let countient = 'AS';
+				let counties = am5geodata_data_countries2.contients[countient];
+				polygonSeries.events.once('datavalidated', function() {
+					for (let id of counties) {
+						var dataItem = polygonSeries.getDataItemById(id);
+						if (dataItem && dataItem.get('mapPolygon')) {
+							var poly = dataItem.get('mapPolygon');
+							poly.set('fill', am5.color('#585')); // 高亮金色
+						}
+					}
+					chart.animate({
+						key: 'rotationX',
+						to: -100,
+						duration: 1000,
+						easing: am5.ease.inOut(am5.ease.cubic)
+					});
+					chart.animate({
+						key: 'rotationY',
+						to: -20,
+						duration: 1000,
+						easing: am5.ease.inOut(am5.ease.cubic)
+					});
+				});
+		
+				
+				// Make stuff animate on load
+				chart.appear(1000, 100);
+			}); // end am5.ready()
+		</script>
+	</body>
+</html>
