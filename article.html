@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>唐诗古韵</title>
+    <style type="text/css">
+        /* 设置整体背景为暗色调，增强炫酷感 */
+        body {
+            background: linear-gradient(45deg, #0a1a0a 50%, #302010);
+        }
+
+        /* 古诗板块样式，添加毛玻璃效果 */
+        .sec {
+            width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(200, 225, 255, 0.2);
+            margin: 50px auto;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 30px;
+            position: relative;
+            /* transition: all 0.3s ease; */
+        }
+
+        /* 鼠标悬停时，古诗板块有轻微放大效果 */
+        .sec:hover {
+            /* transform: scale(1.1); */
+        }
+
+
+        /* 标题样式 */
+        .title {
+            font:bold 40px '隶书';
+            color: #fc3;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        /* 作者样式 */
+        .auth {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 25px;
+            font-family: '仿宋', serif;
+        }
+
+        /* 诗句内容样式 */
+        .cont {
+            width: 300px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px 0;
+            color: #6ff;
+            /* 修改字体为楷体 */
+            font-family: '楷体', serif;
+            font-size: 22px;
+            line-height: 2;
+            text-align: center;
+        }
+
+        /* 诗句段落样式 */
+        .cont p {
+            margin: 0 10px;
+        }
+
+        /* 诗词鉴赏部分样式 */
+        .appreciation {
+            width: 400px;
+            margin: 20px auto 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            color: #cff;
+            font-size: 16px;
+            font-family: '仿宋', serif;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .appreciation::before {
+            content: "诗词鉴赏: \A ";
+            /* content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 24 24'><path d='M12 2L3 22h18z'/></svg>"); */
+            white-space: pre-line;
+            font: bold 18px '仿宋', serif;
+            color: #ffc107;
+        }
+
+        .appreciation::after {
+            display: block;
+            content: "《春晓》是一首惜春诗，看似极为口语化，却又有悠美的韵致，行文又跌宕起伏。诗人以“不知——知；知——不知”的句式，将春天的景物展现给读者。构思精巧，自然天成。语言平易浅近，自然天成，言浅意浓，景真情真，深得大自然的真趣。";
+            font: 16px '仿宋', serif;
+            text-indent: 2em;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sec" id="sec1">
+        <div class="title">春晓</div>
+        <div class="auth">【唐】孟浩然 </div>
+        <div class="cont">
+            <p> 春眠不觉晓，处处闻啼鸟。 </p>
+            <p> 夜来风雨声，花落知多少。 </p>
+        </div>
+        <div class="appreciation">
+        </div>
+    </div>
+
+    <div class="sec" id="sec2">
+        <div class="title">望庐山瀑布</div>
+        <div class="auth">【唐】李白</div>
+        <div class="cont">
+            <p>日照香炉生紫烟，</p>
+            <p>遥看瀑布挂前川。</p>
+            <p>飞流直下三千尺，</p>
+            <p>疑是银河落九天。</p>
+        </div>
+        <div class="appreciation">
+            这首诗形象地描绘了庐山瀑布雄奇壮丽的景色，反映了诗人对祖国大好河山的无限热爱。诗的前两句从香炉峰写起，在阳光的照射下，云雾缭绕，如紫色的烟雾般升腾。接着，诗人将视线转向瀑布，“挂”字化动为静，生动地表现出瀑布的雄伟壮观。后两句“飞流直下三千尺，疑是银河落九天”，运用了夸张和比喻的手法，将瀑布比作银河从天上倾泻而下，让人感受到瀑布的磅礴气势。整首诗意境开阔，气势恢宏，语言生动形象，是李白诗歌的代表作之一。
+        </div>
+    </div>
+
+    <div class="sec" id="sec3">
+        <div class="title">静夜思</div>
+        <div class="auth">【唐】李白</div>
+        <div class="cont">
+            <p>床前明月光，</p>
+            <p>疑是地上霜。</p>
+            <p>举头望明月，</p>
+            <p>低头思故乡。</p>
+        </div>
+        <div class="appreciation">
+            《静夜思》描写了客居他乡的主人公在深夜无法入眠、短梦初回的情景。前两句写主人公在异乡特定环境中一刹那间产生的错觉，仿佛已经回到了家乡。后两句通过主人公的动作神态，深化了他的思乡之情。语言清新朴素而风味含蓄无穷，历来广为传诵。
+        </div>
+    </div>
+
+    <div class="sec" id="sec4">
+        <div class="title">登鹳雀楼</div>
+        <div class="auth">【唐】王之涣</div>
+        <div class="cont">
+            <p>白日依山尽，</p>
+            <p>黄河入海流。</p>
+            <p>欲穷千里目，</p>
+            <p>更上一层楼。</p>
+        </div>
+        <div class="appreciation">
+            这首诗是唐代五言诗的压卷之作，意境雄浑壮阔，气势昂扬。前两句写诗人登楼看到的自然景色，“白日依山尽”，写远景，写山，写的是登楼望见的景色，“黄河入海流”写近景，写水写得景象壮观，气势磅礴。后两句蕴含深刻哲理，道出了只有站得高才能看得远的人生哲理，激励人们不断进取。
+        </div>
+    </div>
+    <script>
+        const div = document.querySelector('#sec1>.appreciation');
+
+        //div右键复制时添加作者
+        div.addEventListener('contextmenu', (e) => {
+            // e.preventDefault()
+            navigator.clipboard.writeText('\n\n作者：李白');
+        });
+
+    </script>
+</body>
+
+</html>
