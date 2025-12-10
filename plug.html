@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Plug-插件目录</title>
+	<link rel="stylesheet" href="https://www.tampermonkey.net/style.css" />
+	<style type="text/css">
+		.documentation{
+			width: 900px;
+			margin: auto;
+			background: #fff;
+			padding: 30px;
+		}
+		.documentation>h1{
+			text-align: center;
+			font-size: 30px;
+		}
+		#toc~a{
+			display: block;
+			padding-left: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div class="row md documentation">
+	  <h1>PLUG-插件目录</h1>
+	  <p id="toc" class="toc"><p>用户脚本标题</p><a href="#meta:name">@name</a><a href="#meta:namespace">@namespace</a><a href="#meta:copyright">@copyright</a><a href="#meta:version">@version</a><a href="#meta:description">@description</a><a href="#meta:icon">@icon, @iconURL, @defaulticon</a><a href="#meta:icon64">@icon64, @icon64URL</a><a href="#meta:grant">@grant</a><a href="#meta:author">@author</a><a href="#meta:homepage">@homepage, @homepageURL, @website, @source</a><a href="#meta:antifeature">@antifeature</a><a href="#meta:require">@require</a><a href="#meta:resource">@resource</a><a href="#meta:include">@include</a><a href="#meta:match">@match</a><a href="#meta:exclude">@exclude</a><a href="#meta:run_at">@run-at</a><a href="#meta:run_in">@run-in </a><a href="#meta:sandbox">@sandbox </a><a href="#meta:tag">@tag</a><a href="#meta:connect">@connect</a><a href="#meta:noframes">@noframes</a><a href="#meta:updateURL">@updateURL</a><a href="#meta:downloadURL">@downloadURL</a><a href="#meta:supportURL">@supportURL</a><a href="#meta:webRequest">@webRequest</a><a href="#meta:unwrap">@unwrap</a><p>应用程序接口</p><a href="#api:unsafeWindow">unsafeWindow</a><a href="#api:Subresource_Integrity">Subresource Integrity</a><a href="#api:GM_addElement">GM_addElement(tag_name, attributes), GM_addElement(parent_node, tag_name, attributes)</a><a href="#api:GM_addStyle">GM_addStyle(css)</a><a href="#api:GM_download">GM_download(details), GM_download(url, name)</a><a href="#api:GM_getResourceText">GM_getResourceText(name)</a><a href="#api:GM_getResourceURL">GM_getResourceURL(name)</a><a href="#api:GM_info">GM_info</a><a href="#api:GM_log">GM_log(message)</a><a href="#api:GM_notification">GM_notification(details, ondone), GM_notification(text, title, image, onclick)</a><a href="#api:GM_openInTab">GM_openInTab(url, options), GM_openInTab(url, loadInBackground)</a><a href="#api:GM_registerMenuCommand">GM_registerMenuCommand(name, callback, options_or_accessKey)</a><a href="#api:GM_unregisterMenuCommand">GM_unregisterMenuCommand(menuCmdId)</a><a href="#api:GM_setClipboard">GM_setClipboard(data, info, cb)</a><a href="#api:GM_getTab">GM_getTab(callback)</a><a href="#api:GM_saveTab">GM_saveTab(tab, cb)</a><a href="#api:GM_getTabs">GM_getTabs(callback)</a><a href="#api:GM_setValue">GM_setValue(key, value)</a><a href="#api:GM_getValue">GM_getValue(key, defaultValue)</a><a href="#api:GM_deleteValue">GM_deleteValue(key)</a><a href="#api:GM_listValues">GM_listValues()</a><a href="#api:GM_setValues">GM_setValues(values) </a><a href="#api:GM_getValues">GM_getValues(keysOrDefaults) </a><a href="#api:GM_deleteValues">GM_deleteValues(keys) </a><a href="#api:GM_addValueChangeListener">GM_addValueChangeListener(key, (key, old_value, new_value, remote) =&gt; void)</a><a href="#api:GM_removeValueChangeListener">GM_removeValueChangeListener(listenerId)</a><a href="#api:GM_xmlhttpRequest">GM_xmlhttpRequest(details)</a><a href="#api:GM_webRequest">GM_webRequest(rules, listener)</a><a href="#api:GM_cookie.list">GM_cookie.list(details[, callback])</a><a href="#api:GM_cookie.set">GM_cookie.set(details[, callback])</a><a href="#api:GM_cookie.delete">GM_cookie.delete(details, callback)</a><a href="#api:window.onurlchange">window.onurlchange</a><a href="#api:window.close">window.close</a><a href="#api:window.focus">window.focus</a><a href="#api:CDATA">&lt;&gt;&lt;![CDATA[...]]&gt;&lt;/&gt;</a></p>
+	
+	  <h1 id="meta">用户脚本标题</h1>
+	  <h2 id="meta:name">@name</h2>
+	<p>The name of the script.</p>
+	<p>Internationalization is done by adding an appendix naming the locale.</p>
+	<pre><code class="hljs language-ts"><span class="hljs-comment">//&nbsp;@name&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;test</span>
+	<span class="hljs-comment">//&nbsp;@name:de&nbsp;Ein&nbsp;Test</span>
+	</code></pre>
+	<h2 id="meta:namespace">@namespace</h2>
+	<p>The namespace of the script.</p>
+	<h2 id="meta:copyright">@copyright</h2>
+	<p>A copyright statement shown at the header of the script's editor right below the script name.</p>
+	
+	
+	<h2 id="meta:version">@version</h2>
+	<p>The script version. This is used for the update check and needs to be increased at every update.</p>
+	<p>In this list the next entry is considered to be a higher version number, eg: <code>Alpha-v1</code> &lt; <code>Alpha-v2</code> and <code>16.4</code> == <code>16.04</code></p>
+	<ul>
+	<li><code>Alpha-v1</code></li>
+	<li><code>Alpha-v2</code></li>
+	<li><code>Alpha-v10</code></li>
+	<li><code>Beta</code></li>
+	<li><code>0.5pre3</code></li>
+	<li><code>0.5prelimiary</code></li>
+	<li><code>0.6pre4</code></li>
+	<li><code>0.6pre5</code></li>
+	<li><code>0.7pre4</code></li>
+	<li><code>0.7pre10</code></li>
+	<li><code>1.-1</code></li>
+	<li><code>1</code> == <code>1.</code> == <code>1.0</code> == <code>1.0.0</code></li>
+	<li><code>1.1a</code></li>
+	<li><code>1.1aa</code></li>
+	<li><code>1.1ab</code></li>
+	<li><code>1.1b</code></li>
+	<li><code>1.1c</code></li>
+	<li><code>1.1.-1</code></li>
+	<li><code>1.1</code> == <code>1.1.0</code> == <code>1.1.00</code></li>
+	<li><code>1.1.1.1.1</code></li>
+	<li><code>1.1.1.1.2</code></li>
+	<li><code>1.1.1.1</code></li>
+	<li><code>1.10.0-alpha</code></li>
+	<li><code>1.10</code> == <code>1.10.0</code></li>
+	<li><code>1.11.0-0.3.7</code></li>
+	<li><code>1.11.0-alpha</code></li>
+	<li><code>1.11.0-alpha.1</code></li>
+	<li><code>1.11.0-alpha+1</code></li>
+	<li><code>1.12+1</code> == <code>1.12+1.0</code></li>
+	<li><code>1.12+1.1</code> == <code>1.12+1.1.0</code></li>
+	<li><code>1.12+2</code></li>
+	<li><code>1.12+2.1</code></li>
+	<li><code>1.12+3</code></li>
+	<li><code>1.12+4</code></li>
+	<li><code>1.12</code></li>
+	<li><code>2.0</code></li>
+	<li><code>16.4</code> == <code>16.04</code></li>
+	<li><code>2023-08-17.alpha</code></li>
+	<li><code>2023-08-17</code></li>
+	<li><code>2023-08-17_14-04</code> == <code>2023-08-17_14-04.0</code></li>
+	<li><code>2023-08-17+alpha</code></li>
+	<li><code>2023-09-11_14-0</code></li>
+	</ul>
+	
+	
+	<h2 id="meta:description">@description</h2>
+	<p>A short significant description.</p>
+	<p>Internationalization is done by adding an appendix naming the locale.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@description&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;userscript&nbsp;does&nbsp;wonderful&nbsp;things</span>
+	<span class="hljs-comment">//&nbsp;@description:de&nbsp;Dieses&nbsp;Userscript&nbsp;tut&nbsp;wundervolle&nbsp;Dinge</span>
+	</code></pre>
+	
+	
+	<h2 id="meta:icon">@icon, @iconURL, @defaulticon</h2>
+	<p>The script icon in low res.</p>
+	<h2 id="meta:icon64">@icon64, @icon64URL</h2>
+	<p>This scripts icon in 64x64 pixels. If this tag, but <code>@icon</code> is given the <code>@icon</code> image will be scaled at some places at the options page.</p>
+	
+	
+	<h2 id="meta:grant">@grant</h2>
+	<p><code>@grant</code> is used to whitelist <code>GM_*</code> and <code>GM.*</code> functions, the <code>unsafeWindow</code> object and some powerful <code>window</code> functions.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@grant&nbsp;GM_setValue</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;GM_getValue</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;GM.setValue</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;GM.getValue</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;GM_setClipboard</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;unsafeWindow</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;window.close</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;window.focus</span>
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;window.onurlchange</span>
+	</code></pre>
+	<p>Since closing and focusing tabs is a powerful feature this needs to be added to the <code>@grant</code> statements as well.
+	In case <code>@grant</code> is followed by <code>none</code> the sandbox is disabled. In this mode no <code>GM_*</code> function but the <code>GM_info</code> property will be available.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@grant&nbsp;none</span>
+	</code></pre>
+	<p>If no <code>@grant</code> tag is given an empty list is assumed. However this different from using <code>none</code>.</p>
+	
+	
+	<h2 id="meta:author">@author</h2>
+	<p>The scripts author.</p>
+	
+	
+	<h2 id="meta:homepage">@homepage, @homepageURL, @website, @source</h2>
+	<p>The authors homepage that is used at the options page to link from the scripts name to the given page. Please note that if the <code>@namespace</code> tag starts with <code>http://</code> its content will be used for this too.</p>
+	
+	
+	<h2 id="meta:antifeature">@antifeature</h2>
+	<p>This tag allows script developers to disclose whether they monetize their scripts. It is for example required by <a href="https://greasyfork.org">GreasyFork</a>.</p>
+	<p>Syntax: &lt;tag&gt; &lt;type&gt; &lt;description&gt;</p>
+	<p> <em>&lt;type&gt;</em> can have the following values:</p>
+	<ul>
+	<li>ads</li>
+	<li>tracking</li>
+	<li>miner</li>
+	</ul>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@antifeature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We&nbsp;show&nbsp;you&nbsp;ads</span>
+	<span class="hljs-comment">//&nbsp;@antifeature:fr&nbsp;&nbsp;&nbsp;&nbsp;ads&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nous&nbsp;vous&nbsp;montrons&nbsp;des&nbsp;publicités</span>
+	<span class="hljs-comment">//&nbsp;@antifeature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tracking&nbsp;&nbsp;&nbsp;&nbsp;We&nbsp;have&nbsp;some&nbsp;sort&nbsp;of&nbsp;analytics&nbsp;included</span>
+	<span class="hljs-comment">//&nbsp;@antifeature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;miner&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We&nbsp;use&nbsp;your&nbsp;computer's&nbsp;resources&nbsp;to&nbsp;mine&nbsp;a&nbsp;crypto&nbsp;currency</span>
+	</code></pre>
+	<p>Internationalization is done by adding an appendix naming the locale.</p>
+	
+	
+	<h2 id="meta:require">@require</h2>
+	<p>Points to a JavaScript file that is loaded and executed before the script itself starts running.
+	Note: the scripts loaded via <code>@require</code> and their <em>"use strict"</em> statements might influence the userscript's strict mode!</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@require&nbsp;https://code.jquery.com/jquery-2.1.4.min.js</span>
+	<span class="hljs-comment">//&nbsp;@require&nbsp;https://code.jquery.com/jquery-2.1.3.min.js#sha256=23456...</span>
+	<span class="hljs-comment">//&nbsp;@require&nbsp;https://code.jquery.com/jquery-2.1.2.min.js#md5=34567...,sha256=6789...</span>
+	<span class="hljs-comment">//&nbsp;@require&nbsp;tampermonkey://vendor/jquery.js</span>
+	<span class="hljs-comment">//&nbsp;@require&nbsp;tampermonkey://vendor/jszip/jszip.js</span>
+	</code></pre>
+	<p>Please check the <a href="#api:Subresource_Integrity">sub-resource integrity</a> section for more information how to ensure integrity.</p>
+	<p>Multiple tag instances are allowed.</p>
+	<h2 id="meta:resource">@resource</h2>
+	<p>Preloads resources that can by accessed via <code>GM_getResourceURL</code> and <code>GM_getResourceText</code> by the script.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@resource&nbsp;icon1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.tampermonkey.net/favicon.ico</span>
+	<span class="hljs-comment">//&nbsp;@resource&nbsp;icon2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/images/icon.png</span>
+	<span class="hljs-comment">//&nbsp;@resource&nbsp;html&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.tampermonkey.net/index.html</span>
+	<span class="hljs-comment">//&nbsp;@resource&nbsp;xml&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://www.tampermonkey.net/crx/tampermonkey.xml</span>
+	<span class="hljs-comment">//&nbsp;@resource&nbsp;SRIsecured1&nbsp;http://www.tampermonkey.net/favicon.ico#md5=123434...</span>
+	<span class="hljs-comment">//&nbsp;@resource&nbsp;SRIsecured2&nbsp;http://www.tampermonkey.net/favicon.ico#md5=123434...;sha256=234234...</span>
+	</code></pre>
+	<p>Please check the <a href="#api:Subresource_Integrity">sub-resource integrity</a> section for more information how to ensure integrity.</p>
+	<p>Multiple tag instances are allowed.</p>
+	
+	
+	<h2 id="meta:include">@include</h2>
+	<p>The pages on that a script should run. Multiple tag instances are allowed.
+	@include doesn't support the URL hash parameter. You have to match the path without the hash parameter and make use of <a href="#api:window.onurlchange">window.onurlchange</a></p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@include&nbsp;http://www.tampermonkey.net/*</span>
+	<span class="hljs-comment">//&nbsp;@include&nbsp;http://*</span>
+	<span class="hljs-comment">//&nbsp;@include&nbsp;https://*</span>
+	<span class="hljs-comment">//&nbsp;@include&nbsp;/^https:\/\/www\.tampermonkey\.net\/.*$/</span>
+	<span class="hljs-comment">//&nbsp;@include&nbsp;*</span>
+	</code></pre>
+	<p>Note: When writing something like <code>*://tmnk.net/*</code> many script developers expect the script to run at <code>tmnk.net</code> only, but this is not the case.
+	It also runs at <code>https://example.com/?http://tmnk.net/</code> as well.</p>
+	<p>Therefore Tampermonkey interprets <code>@includes</code> that contain a <code>://</code> a little bit like <code>@match</code>. Every <code>*</code> before <code>://</code> only matches everything except <code>:</code> characters to makes sure only the URL scheme is matched.
+	Also, if such an <code>@include</code> contains a <code>/</code> after <code>://</code>, then everything between those strings is treat as host, matching everything except <code>/</code> characters. The same applies to <code>*</code> directly following <code>://</code>.</p>
+	<p></p>
+	<h2 id="meta:match">@match</h2>
+	<p>In Tampermonkey, the <code>@match</code> directive is used to specify the web pages that your script should run on.
+	The value of <code>@match</code> should be a URL pattern that matches the pages you want your script to run on. Here are the parts of the URL pattern that you'll need to set:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@match&nbsp;&lt;protocol&gt;://&lt;domain&gt;&lt;path&gt;</span>
+	</code></pre>
+	<ul>
+	<li><strong>protocol</strong> - This is the first part of the URL, before the colon. It specifies the protocol that the page uses, such as <code>http</code> or <code>https</code>. <code>*</code> matches both.</li>
+	<li><strong>domain</strong> - This is the second part of the URL, after the protocol and two slashes. It specifies the domain name of the website, such as <code>tmnk.com</code>. You can use the wildcard character this way <code>*.tmnk.net</code> to match <code>tmnk.net</code> and any sub-domain of it like <code>www.tmnk.net</code>.</li>
+	<li><strong>path</strong> - This is the part of the URL that comes after the domain name, and may include additional subdirectories or filenames. You can use the wildcard character <code>*</code> to match any part of the path.</li>
+	</ul>
+	<p>Please check <a href="https://developer.chrome.com/docs/extensions/mv2/match_patterns/">this documentation</a> to get more information about match pattern. Note: the <code>&lt;all_urls&gt;</code> statement is not yet supported and the scheme part also accepts <code>http*://</code>.</p>
+	<p>Multiple tag instances are allowed.</p>
+	<p>More examples:</p>
+	<pre><code class="language-ts* hljs language-ts"><span class="hljs-comment">//&nbsp;@match&nbsp;*://*/*</span>
+	<span class="hljs-comment">//&nbsp;@match&nbsp;https://*/*</span>
+	<span class="hljs-comment">//&nbsp;@match&nbsp;http://*/foo*</span>
+	<span class="hljs-comment">//&nbsp;@match&nbsp;https://*.tampermonkey.net/foo*bar</span>
+	</code></pre>
+	<h2 id="meta:exclude">@exclude</h2>
+	<p>Exclude URLs even it they are included by <code>@include</code> or <code>@match</code>.</p>
+	<p>Multiple tag instances are allowed.</p>
+	
+	
+	<h2 id="meta:run_at">@run-at</h2>
+	<p>Defines the moment the script is injected.
+	In opposition to other script handlers, <code>@run-at</code> defines the first possible moment a script wants to run.
+	This means it may happen, that a script that uses the <code>@require</code> tag may be executed after the document is already loaded, cause fetching the required script took that long.</p>
+	<p>Anyhow, all <code>DOMNodeInserted</code>, <code>DOMContentLoaded</code> and <code>load</code> events fired after the given injection moment are cached and delivered to listeners registered via the sandbox's <code>window.addEventListener</code> method.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-at&nbsp;document-start</span>
+	</code></pre>
+	<p>The script will be injected as fast as possible.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-at&nbsp;document-body</span>
+	</code></pre>
+	<p>The script will be injected if the body element exists.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-at&nbsp;document-end</span>
+	</code></pre>
+	<p>The script will be injected when or after the DOMContentLoaded event was dispatched.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-at&nbsp;document-idle</span>
+	</code></pre>
+	<p>The script will be injected after the DOMContentLoaded event was dispatched. This is the default value if no <code>@run-at</code> tag is given.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-at&nbsp;context-menu</span>
+	</code></pre>
+	<p>The script will be injected if it is clicked at the browser context menu.</p>
+	<p>Note: all <code>@include</code> and <code>@exclude</code> statements will be ignored if this value is used, but this may change in the future.</p>
+	
+	
+	<h2 id="meta:run_in">@run-in <sup>v5.3+</sup></h2>
+	<p>Defines the type of browser context in which the script is injected. This meta key allows you to control whether the script should run in normal browsing tabs, incognito tabs, or both. This provides flexibility in determining the script's behavior based on the privacy context of the browsing session.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-in&nbsp;normal-tabs</span>
+	</code></pre>
+	<p>The script will be injected only in normal browsing tabs (non-incognito mode, default container).</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-in&nbsp;incognito-tabs</span>
+	</code></pre>
+	<p>The script will be injected only in incognito browsing tabs (private mode). In Firefox, this means all tabs that don't use the default cookie store.</p>
+	<p>Firefox supports containers, which allow you to separate your browsing activities into distinct contexts. You can specify the container ID in the <code>@run-in</code> tag to control the script's behavior based on the container context.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@run-in&nbsp;container-id-2</span>
+	<span class="hljs-comment">//&nbsp;@run-in&nbsp;container-id-3</span>
+	</code></pre>
+	<p>The script will be injected only in tabs that belong to the specified containers. The container ID can be found by checking <code>GM_info.container</code> when the script is running in the desired container context.</p>
+	<p>If no <code>@run-in</code> tag is specified, the script defaults to being injected in all tabs.</p>
+	
+	
+	<h2 id="meta:sandbox">@sandbox <sup>4.18+</sup></h2>
+	<p><code>@sandbox</code> allows Tampermonkey to decide where the userscript is injected:</p>
+	<ul>
+	<li><code>MAIN_WORLD</code> - the page</li>
+	<li><code>ISOLATED_WORLD</code> - the extension's content script</li>
+	<li><code>USERSCRIPT_WORLD</code> - a special context created for userscripts</li>
+	</ul>
+	<p>But instead of specifying an environment, the userscript can express what exactly it needs access to. <code>@sandbox</code> supports three possible arguments:</p>
+	<ul>
+	<li><p><code>raw</code>
+	"Raw" access means that a script for compatibility reasons always needs to run in page context, the <code>MAIN_WORLD</code>.
+	At the moment this mode is the default if <code>@sandbox</code> is omitted.
+	If injection into the <code>MAIN_WORLD</code> is not possible (e.g. because of a CSP) the userscript will be injected into other (enabled) sandboxes according to the order of this list.</p>
+	</li>
+	<li><p><code>JavaScript</code>
+	"JavaScript" access mode means that this script needs access to <code>unsafeWindow</code>.
+	At Firefox a special context, the <code>USERSCRIPT_WORLD</code>, is created which also bypasses existing CSPs. It however, might create new issues since now <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Sharing_objects_with_page_scripts"><code>cloneInto</code> and <code>exportFunction</code></a> are necessary to share objects with the page.
+	<code>raw</code> mode is used as fallback at other browsers.</p>
+	</li>
+	<li><p><code>DOM</code>
+	Use this access mode if the script only needs DOM and no direct <code>unsafeWindow</code> access.
+	If <a href="/faq#Q404">enabled</a> these scripts are executed inside the extension context, the <code>ISOLATED_WORLD</code>, or at any other enabled context otherwise, because they all grant DOM access.</p>
+	</li>
+	</ul>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@sandbox&nbsp;JavaScript</span>
+	</code></pre>
+	
+	
+	<h2 id="meta:tag">@tag</h2>
+	<p>You can add tags to your script which will be visible in the script list if this tag is part of your system's tag list.
+	Tags can be useful to categorize your scripts or to mark them as a certain type.
+	The list of tags can be found at the script's settings page.</p>
+	<p></p><p><img class="desc" alt="tags" title="tags" data-src="/images/dashboard_tags.png" src="/images/dashboard_tags.png"><span>Example of a script with tags</span></p><p></p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;==UserScript==</span>
+	<span class="hljs-comment">//&nbsp;@name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My&nbsp;Script</span>
+	<span class="hljs-comment">//&nbsp;@tag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;productivity</span>
+	<span class="hljs-comment">//&nbsp;==/UserScript==</span>
+	</code></pre>
+	
+	
+	<h2 id="meta:connect">@connect</h2>
+	<p>This tag defines the domains (no top-level domains) including subdomains which are allowed to be retrieved by <a href="#api:GM_xmlhttpRequest">GM_xmlhttpRequest</a></p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@connect&nbsp;&lt;value&gt;</span>
+	</code></pre>
+	<p><code>&lt;value&gt;</code> can be:</p>
+	<ul>
+	<li>a domain name like <code>example.com</code> (this will also allow all subdomains).</li>
+	<li>a subdomain name like <code>subdomain.example.com</code>.</li>
+	<li><code>self</code> to whitelist the domain the script is currently running at.</li>
+	<li><code>localhost</code> to access the localhost.</li>
+	<li>an IP address like <code>1.2.3.4</code>.</li>
+	<li><code>*</code>.</li>
+	</ul>
+	<p>If it's not possible to declare <u>all</u> domains a userscript might connect to then it's a good practice to do the following:</p>
+	<ol>
+	<li>Declare <u>all known</u> or at least <u>all common</u> domains that might be connected by the script to avoid the confirmation dialog for most users.</li>
+	<li>Additionally add <code>@connect *</code> to the script to allow Tampermonkey to offer an "Always allow all domains" button.</li>
+	</ol>
+	<p>Users can also whitelist all requests by adding <code>*</code> to the user domain whitelist at the script settings tab.</p>
+	<p>Notes:</p>
+	<ul>
+	<li>Both, the initial <strong>and</strong> the final URL will be checked!</li>
+	<li>For backward compatibility to Scriptish <a href="https://github.com/scriptish/scriptish/wiki/Manual%3A-Metadata-Block#user-content-domain-new-in-scriptish"><code>@domain</code></a> tags are interpreted as well.</li>
+	<li>Multiple tag instances are allowed.</li>
+	</ul>
+	<p>More examples:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@connect&nbsp;tmnk.net</span>
+	<span class="hljs-comment">//&nbsp;@connect&nbsp;www.tampermonkey.net</span>
+	<span class="hljs-comment">//&nbsp;@connect&nbsp;self</span>
+	<span class="hljs-comment">//&nbsp;@connect&nbsp;localhost</span>
+	<span class="hljs-comment">//&nbsp;@connect&nbsp;8.8.8.8</span>
+	<span class="hljs-comment">//&nbsp;@connect&nbsp;*</span>
+	</code></pre>
+	
+	
+	<h2 id="meta:noframes">@noframes</h2>
+	<p>This tag makes the script running on the main pages, but not at iframes.</p>
+	
+	
+	<h2 id="meta:updateURL">@updateURL</h2>
+	<p>An update URL for the userscript.
+	Note: a <code>@version</code> tag is required to make update checks work.</p>
+	<h2 id="meta:downloadURL">@downloadURL</h2>
+	<p>Defines the URL where the script will be downloaded from when an update was detected. If the value <em>none</em> is used, then no update check will be done.</p>
+	<h2 id="meta:supportURL">@supportURL</h2>
+	<p>Defines the URL where the user can report issues and get personal support.</p>
+	
+	
+	<h2 id="meta:webRequest">@webRequest</h2>
+	<p>Note: this API is experimental and might change at any time. It is also not available anymore at Manifest v3 versions of Tampermonkey 5.2+ (Chrome and derivates).</p>
+	<p><code>@webRequest</code> takes a JSON document that matches <a href="#api:GM_webRequest"><code>GM_webRequest</code></a>'s <code>rule</code> parameter. It allows the rules to apply even before the userscript is loaded.</p>
+	
+	
+	<h2 id="meta:unwrap">@unwrap</h2>
+	<p>Injects the userscript without any wrapper and sandbox into the page, which might be useful for Scriptlets.</p>
+	
+	
+	  <h1 id="api">应用程序接口</h1>
+	  <h2 id="api:unsafeWindow">unsafeWindow</h2>
+	<p>The <code>unsafeWindow</code> object provides access to the <code>window</code> object of the page that Tampermonkey is running on, rather than the <code>window</code> object of the Tampermonkey extension. This can be useful in some cases, such as when a userscript needs to access a JavaScript library or variable that is defined on the page.</p>
+	
+	
+	<h2 id="api:Subresource_Integrity">Subresource Integrity</h2>
+	<p>Subresource Integrity (SRI) is a security feature that allows userscript developers to ensure that the external resources (such as JavaScript libraries and CSS files) that they include in their userscript have not been tampered with or modified. This is accomplished by generating a cryptographic hash of the resource and including it in <code>@require</code> and <code>@resource</code> tags. When the userscript is installed, Tampermonkey will calculate the hash of the resource and compare it to the included hash. If the two hashes do not match, Tampermonkey will refuse to load the resource, preventing attackers from injecting malicious code into your userscript.</p>
+	<p>The hash component of the URL of <code>@resource</code> and <code>@require</code> tags is used for this purpose.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;@resource&nbsp;SRIsecured1&nbsp;http://example.com/favicon1.ico#md5=ad34bb...</span>
+	<span class="hljs-comment">//&nbsp;@resource&nbsp;SRIsecured2&nbsp;http://example.com/favicon2.ico#md5=ac3434...,sha256=23fd34...</span>
+	<span class="hljs-comment">//&nbsp;@require&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://code.jquery.com/jquery-2.1.1.min.js#md5=45eef...</span>
+	<span class="hljs-comment">//&nbsp;@require&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://code.jquery.com/jquery-2.1.2.min.js#md5-ac56d...,sha256-6e789...</span>
+	<span class="hljs-comment">//&nbsp;@require&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://code.jquery.com/jquery-3.6.0.min.js#sha256-/xUj+3OJU...ogEvDej/m4=</span>
+	</code></pre>
+	<p>Tampermonkey supports <code>SHA-256</code> and <code>MD5</code> hashes natively, all other (<code>SHA-1</code>, <code>SHA-384</code> and <code>SHA-512</code>) depend on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto">window.crypto</a>.</p>
+	<p>In case multiple hashes (separated by comma or semicolon) are given the last currently supported one is used by Tampermonkey. All hashes need to be encoded in either hex or Base64 format.</p>
+	
+	
+	<h2 id="api:GM_addElement">GM_addElement(tag_name, attributes), GM_addElement(parent_node, tag_name, attributes)</h2>
+	<p><code>GM_addElement</code> allows Tampermonkey scripts to add new elements to the page that Tampermonkey is running on. This can be useful for a variety of purposes, such as adding <code>script</code> and <code>img</code> tags if the page limits these elements with a content security policy (CSP).</p>
+	<p>It creates an HTML element specified by <em>"tag_name"</em> and applies all given <em>"attributes"</em> and returns the injected HTML element. If a <em>"parent_node"</em> is given, then it is attached to it or to document head or body otherwise.</p>
+	<p>For suitable <em>"attributes"</em>, please consult the appropriate documentation. For example:</p>
+	<ul>
+	<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script">script tag</a></li>
+	<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img">img tag</a></li>
+	<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style">style tag</a></li>
+	</ul>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_addElement</span>(<span class="hljs-string">'script'</span>,&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-attr">textContent</span>:&nbsp;<span class="hljs-string">'window.foo&nbsp;=&nbsp;"bar";'</span>
+	});
+	
+	<span class="hljs-title function_">GM_addElement</span>(<span class="hljs-string">'script'</span>,&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-attr">src</span>:&nbsp;<span class="hljs-string">'https://example.com/script.js'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">type</span>:&nbsp;<span class="hljs-string">'text/javascript'</span>
+	});
+	
+	<span class="hljs-title function_">GM_addElement</span>(<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByTagName</span>(<span class="hljs-string">'div'</span>)[<span class="hljs-number">0</span>],&nbsp;<span class="hljs-string">'img'</span>,&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-attr">src</span>:&nbsp;<span class="hljs-string">'https://example.com/image.png'</span>
+	});
+	
+	<span class="hljs-title function_">GM_addElement</span>(shadowDOM,&nbsp;<span class="hljs-string">'style'</span>,&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-attr">textContent</span>:&nbsp;<span class="hljs-string">'div&nbsp;{&nbsp;color:&nbsp;black;&nbsp;};'</span>
+	});
+	</code></pre>
+	<p>Note: this feature is experimental and the API may change.</p>
+	
+	
+	<h2 id="api:GM_addStyle">GM_addStyle(css)</h2>
+	<p>Adds the given style to the document and returns the injected style element.</p>
+	
+	
+	<h2 id="api:GM_download">GM_download(details), GM_download(url, name)</h2>
+	<p><code>GM_download</code> allows userscripts to download a file from a specified URL and save it to the user's local machine.</p>
+	<p>The <code>GM_download</code> function takes the following parameters:</p>
+	<p><em>details</em> can have the following attributes:</p>
+	<ul>
+	<li><strong>url</strong>: The URL of the file to download or a <code>Blob</code> or <code>File</code> object<sup>v5.4.6226+</sup>. In case of a string, this must be a valid URL and must point to a file that is accessible to the user.</li>
+	<li><strong>name</strong>:
+	The name to use for the downloaded file.
+	This should include the file's extension, such as .txt or .pdf.
+	For security reasons the file extension needs to be whitelisted at Tampermonkey's options page</li>
+	<li><strong>headers</strong>:
+	An object containing HTTP headers to include in the download request.
+	See <a href="#meta:GM_xmlhttpRequest"><code>GM_xmlhttpRequest</code></a> for more details.</li>
+	<li><strong>saveAs</strong>:
+	A boolean value indicating whether to use the user's default download location, or to prompt the user to choose a different location.
+	This option works in browser API mode only.</li>
+	<li><strong>conflictAction</strong>:
+	A string that control what happens when a file with this name already exists. This option works in browser API mode only.
+	Possible values are <code>uniquify</code>, <code>overwrite</code> and <code>prompt</code>.
+	Please check <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/downloads/FilenameConflictAction">this link</a> for more details.</li>
+	<li><strong>onload</strong>: A function to call when the download has completed successfully.</li>
+	<li><strong>onerror</strong>: A function to call if the download fails or is cancelled.</li>
+	<li><strong>onprogress</strong> A callback to be executed if this download made some progress.</li>
+	<li><strong>ontimeout</strong> A callback to be executed if this download failed due to a timeout.</li>
+	</ul>
+	<p>The <em>download</em> argument of the <em>onerror</em> callback can have the following attributes:</p>
+	<ul>
+	<li><strong>error</strong>: error reason<ul>
+	<li>not_enabled - the download feature isn't enabled by the user</li>
+	<li>not_whitelisted - the requested file extension is not whitelisted</li>
+	<li>not_permitted - the user enabled the download feature, but did not give the <em>downloads</em> permission</li>
+	<li>not_supported - the download feature isn't supported by the browser/version</li>
+	<li>not_succeeded - the download wasn't started or failed, the <em>details</em> attribute may provide more information</li>
+	</ul>
+	</li>
+	<li><strong>details</strong>: detail about that error</li>
+	</ul>
+	<p>Returns an object with the following property:</p>
+	<ul>
+	<li><strong>abort</strong>: A function which can be called to cancel this download.</li>
+	</ul>
+	<p>If <code>GM.download</code> is used it returns a promise that resolves to the download details and also has an <code>abort</code> function.</p>
+	<p>Depending on the download mode <code>GM_info</code> provides a property called <code>downloadMode</code> which is set to one of the following values: <strong>native</strong>, <strong>disabled</strong> or <strong>browser</strong>.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_download</span>(<span class="hljs-string">"http://example.com/file.txt"</span>,&nbsp;<span class="hljs-string">"file.txt"</span>);
+	
+	<span class="hljs-keyword">const</span>&nbsp;download&nbsp;=&nbsp;<span class="hljs-title function_">GM_download</span>({
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">url</span>:&nbsp;<span class="hljs-string">"http://example.com/file.txt"</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">name</span>:&nbsp;<span class="hljs-string">"file.txt"</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">saveAs</span>:&nbsp;<span class="hljs-literal">true</span>
+	});
+	
+	<span class="hljs-comment">//&nbsp;cancel&nbsp;download&nbsp;after&nbsp;5&nbsp;seconds</span>
+	<span class="hljs-variable language_">window</span>.<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()&nbsp;=&gt;</span>&nbsp;download.<span class="hljs-title function_">abort</span>(),&nbsp;<span class="hljs-number">5000</span>);
+	</code></pre>
+	<p>Note: The browser might modify the desired filename. Especially a file extension might be added if the browser finds this to be safe to download at the current OS.</p>
+	
+	
+	<h2 id="api:GM_getResourceText">GM_getResourceText(name)</h2>
+	<p>Allows userscripts to access the text of a resource (such as a JavaScript or CSS file) that has been included in a userscript via <code>@resource</code>.</p>
+	<p>The function takes a single parameter, which is the <em>"name"</em> of the resource to retrieve. It returns the text of the resource as a string.</p>
+	<p>Here is an example of how the function might be used:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-keyword">const</span>&nbsp;scriptText&nbsp;=&nbsp;<span class="hljs-title function_">GM_getResourceText</span>(<span class="hljs-string">"myscript.js"</span>);
+	<span class="hljs-keyword">const</span>&nbsp;scriptText2&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">getResourceText</span>(<span class="hljs-string">"myscript.js"</span>);
+	<span class="hljs-keyword">const</span>&nbsp;script&nbsp;=&nbsp;<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">"script"</span>);
+	script.<span class="hljs-property">textContent</span>&nbsp;=&nbsp;scriptText;
+	<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(script);
+	</code></pre>
+	<h2 id="api:GM_getResourceURL">GM_getResourceURL(name)</h2>
+	<p><code>GM_getResourceURL</code> allows userscripts to access the URL of a resource (such as a CSS or image file) that has been included in the userscript via a <code>@resource</code> tag at the script header.</p>
+	<p>The function takes a single parameter, which is the <em>"name"</em> of the resource to retrieve. It returns the URL of the resource as a string.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-keyword">const</span>&nbsp;imageUrl&nbsp;=&nbsp;<span class="hljs-title function_">GM_getResourceURL</span>(<span class="hljs-string">"myimage.png"</span>);
+	<span class="hljs-keyword">const</span>&nbsp;imageUrl2&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">getResourceUrl</span>(<span class="hljs-string">"myimage.png"</span>);
+	<span class="hljs-keyword">const</span>&nbsp;image&nbsp;=&nbsp;<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">"img"</span>);
+	image.<span class="hljs-property">src</span>&nbsp;=&nbsp;imageUrl;
+	<span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-title function_">appendChild</span>(image);
+	</code></pre>
+	<p><strong>Important:</strong>: The promise-based version of this function is called <code>GM.getResourceUrl</code> (with a lowercase "u" and "l" in "Url").</p>
+	
+	
+	<h2 id="api:GM_info">GM_info</h2>
+	<p>Get some info about the script and TM. The object might look like this:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-keyword">type</span>&nbsp;<span class="hljs-title class_">ScriptGetInfo</span>&nbsp;=&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;container?:&nbsp;{&nbsp;<span class="hljs-comment">//&nbsp;5.3+&nbsp;|&nbsp;Firefox&nbsp;only</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">id</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name?:&nbsp;<span class="hljs-built_in">string</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;},
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">downloadMode</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;isFirstPartyIsolation?:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">isIncognito</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">sandboxMode</span>:&nbsp;<span class="hljs-title class_">SandboxMode</span>,&nbsp;<span class="hljs-comment">//&nbsp;4.18+</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">scriptHandler</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">scriptMetaStr</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">scriptUpdateURL</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">scriptWillUpdate</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">userAgentData</span>:&nbsp;<span class="hljs-title class_">UADataValues</span>,&nbsp;<span class="hljs-comment">//&nbsp;4.19+</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;version?:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">script</span>:&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">antifeatures</span>:&nbsp;{&nbsp;[<span class="hljs-attr">antifeature</span>:&nbsp;<span class="hljs-built_in">string</span>]:&nbsp;{&nbsp;[<span class="hljs-attr">locale</span>:&nbsp;<span class="hljs-built_in">string</span>]:&nbsp;<span class="hljs-built_in">string</span>&nbsp;}&nbsp;},
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">author</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">blockers</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">connects</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">copyright</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;deleted?:&nbsp;<span class="hljs-built_in">number</span>&nbsp;|&nbsp;<span class="hljs-literal">undefined</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">description_i18n</span>:&nbsp;{&nbsp;[<span class="hljs-attr">locale</span>:&nbsp;<span class="hljs-built_in">string</span>]:&nbsp;<span class="hljs-built_in">string</span>&nbsp;}&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">description</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">downloadURL</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">excludes</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">fileURL</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">grant</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">header</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">homepage</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">icon</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">icon64</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">includes</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">lastModified</span>:&nbsp;<span class="hljs-built_in">number</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">matches</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">name_i18n</span>:&nbsp;{&nbsp;[<span class="hljs-attr">locale</span>:&nbsp;<span class="hljs-built_in">string</span>]:&nbsp;<span class="hljs-built_in">string</span>&nbsp;}&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">name</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">namespace</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">position</span>:&nbsp;<span class="hljs-built_in">number</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">resources</span>:&nbsp;<span class="hljs-title class_">Resource</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">supportURL</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;system?:&nbsp;<span class="hljs-built_in">boolean</span>&nbsp;|&nbsp;<span class="hljs-literal">undefined</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">'run-at'</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">'run-in'</span>:&nbsp;<span class="hljs-built_in">string</span>[]&nbsp;|&nbsp;<span class="hljs-literal">null</span>,&nbsp;<span class="hljs-comment">//&nbsp;5.3+</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">unwrap</span>:&nbsp;<span class="hljs-built_in">boolean</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">updateURL</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">version</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">webRequest</span>:&nbsp;<span class="hljs-title class_">WebRequestRule</span>[]&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">options</span>:&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">check_for_updates</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">comment</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">compatopts_for_requires</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">compat_wrappedjsobject</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">compat_metadata</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">compat_foreach</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">compat_powerful_this</span>:&nbsp;<span class="hljs-built_in">boolean</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">sandbox</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">noframes</span>:&nbsp;<span class="hljs-built_in">boolean</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">unwrap</span>:&nbsp;<span class="hljs-built_in">boolean</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">run_at</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">run_in</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,&nbsp;<span class="hljs-comment">//&nbsp;5.3+</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">override</span>:&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">use_includes</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">orig_includes</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">merge_includes</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">use_matches</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">orig_matches</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">merge_matches</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">use_excludes</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">orig_excludes</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">merge_excludes</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">use_connects</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">orig_connects</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">merge_connects</span>:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">use_blockers</span>:&nbsp;<span class="hljs-built_in">string</span>[],
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">orig_run_at</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">orig_run_in</span>:&nbsp;<span class="hljs-built_in">string</span>[]&nbsp;|&nbsp;<span class="hljs-literal">null</span>,&nbsp;<span class="hljs-comment">//&nbsp;5.3+</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">orig_noframes</span>:&nbsp;<span class="hljs-built_in">boolean</span>&nbsp;|&nbsp;<span class="hljs-literal">null</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+	&nbsp;&nbsp;&nbsp;&nbsp;}
+	};
+	
+	<span class="hljs-keyword">type</span>&nbsp;<span class="hljs-title class_">SandboxMode</span>&nbsp;=&nbsp;<span class="hljs-string">'js'</span>&nbsp;|&nbsp;<span class="hljs-string">'raw'</span>&nbsp;|&nbsp;<span class="hljs-string">'dom'</span>;
+	
+	<span class="hljs-keyword">type</span>&nbsp;<span class="hljs-title class_">Resource</span>&nbsp;=&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">name</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">url</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;error?:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;content?:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;meta?:&nbsp;<span class="hljs-built_in">string</span>
+	};
+	
+	<span class="hljs-keyword">type</span>&nbsp;<span class="hljs-title class_">WebRequestRule</span>&nbsp;=&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">selector</span>:&nbsp;{&nbsp;include?:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-built_in">string</span>[],&nbsp;match?:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-built_in">string</span>[],&nbsp;exclude?:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;<span class="hljs-built_in">string</span>[]&nbsp;}&nbsp;|&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">action</span>:&nbsp;<span class="hljs-built_in">string</span>&nbsp;|&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cancel?:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;redirect?:&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">url</span>:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">from</span>?:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to?:&nbsp;<span class="hljs-built_in">string</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;|&nbsp;<span class="hljs-built_in">string</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;}
+	};
+	
+	<span class="hljs-keyword">type</span>&nbsp;<span class="hljs-title class_">UADataValues</span>&nbsp;=&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;brands?:&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">brand</span>:&nbsp;<span class="hljs-built_in">string</span>;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">version</span>:&nbsp;<span class="hljs-built_in">string</span>;
+	&nbsp;&nbsp;&nbsp;&nbsp;}[],
+	&nbsp;&nbsp;&nbsp;&nbsp;mobile?:&nbsp;<span class="hljs-built_in">boolean</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;platform?:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;architecture?:&nbsp;<span class="hljs-built_in">string</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;bitness?:&nbsp;<span class="hljs-built_in">string</span>
+	}
+	</code></pre>
+	
+	
+	<h2 id="api:GM_log">GM_log(message)</h2>
+	<p>Log a message to the console.</p>
+	
+	
+	<h2 id="api:GM_notification">GM_notification(details, ondone), GM_notification(text, title, image, onclick)</h2>
+	<p><code>GM_notification</code> allows users to display notifications on the screen, using a provided message and other optional parameters.</p>
+	<p>The function takes several parameters. Either a <em>details</em> object or multiple parameters.</p>
+	<p>The <em>details</em> object can have the following attributes, from which some can also be used as direct parameter.</p>
+	<p>The available options include:</p>
+	<ul>
+	<li><strong>text</strong>: A string containing the message to display in the notification.</li>
+	<li><strong>title</strong>: The title of the notification.</li>
+	<li><strong>tag</strong>: <sup>v5.0+</sup> This tag will be used to identify this notification. This way you can update existing notifications by calling <code>GM_notification</code> again and using the same tag. If you don't provide a tag, a new notification will be created every time.</li>
+	<li><strong>image</strong>: The URL of an image to display in the notification.</li>
+	<li><strong>highlight</strong>: A boolean flag whether to highlight the tab that sends the notfication (required unless text is set)</li>
+	<li><strong>silent</strong>: A boolean flag whether to not play a sound</li>
+	<li><strong>timeout</strong>: The time, in milliseconds, after which the notification should automatically close.</li>
+	<li><strong>url</strong>: <sup>v5.0+</sup> A URL to load when the user clicks on the notification. You can prevent loading the URL by calling <code>event.preventDefault()</code> in the <code>onclick</code> event handler.</li>
+	<li><strong>onclick</strong>: A callback function that will be called when the user clicks on the notification.</li>
+	<li><strong>ondone</strong> A callback function that will be called when the notification is closed (no matter if this was triggered by a timeout or a click) or the tab was highlighted</li>
+	</ul>
+	<p>The function does not return a value.</p>
+	<p>If no <code>url</code> and no <code>tag</code> is provided the notification will closed when the userscript unloads <sup>v5.0+</sup>(e.g. when the page is reloaded or the tab is closed).</p>
+	<p>Here is an example of how the function might be used:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_notification</span>({
+	&nbsp;&nbsp;<span class="hljs-attr">text</span>:&nbsp;<span class="hljs-string">"This&nbsp;is&nbsp;the&nbsp;notification&nbsp;message."</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">title</span>:&nbsp;<span class="hljs-string">"Notification&nbsp;Title"</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">url</span>:&nbsp;<span class="hljs-string">'https:/example.com/'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">onclick</span>:&nbsp;<span class="hljs-function">(<span class="hljs-params">event</span>)&nbsp;=&gt;</span>&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;The&nbsp;userscript&nbsp;is&nbsp;still&nbsp;running,&nbsp;so&nbsp;don't&nbsp;open&nbsp;example.com</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;event.<span class="hljs-title function_">preventDefault</span>();
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;Display&nbsp;an&nbsp;alert&nbsp;message&nbsp;instead</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-title function_">alert</span>(<span class="hljs-string">'I&nbsp;was&nbsp;clicked!'</span>)
+	&nbsp;&nbsp;}
+	});
+	
+	<span class="hljs-keyword">const</span>&nbsp;clicked&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">notification</span>({&nbsp;<span class="hljs-attr">text</span>:&nbsp;<span class="hljs-string">"Click&nbsp;me."</span>&nbsp;});
+	</code></pre>
+	
+	
+	<h2 id="api:GM_openInTab">GM_openInTab(url, options), GM_openInTab(url, loadInBackground)</h2>
+	<p><code>GM_openInTab</code> allows userscripts to open a new tab in the browser and navigate to a specified URL.</p>
+	<p>The function takes two parameters:</p>
+	<p>A string names <em>"url"</em> containing the URL of the page to open in the new tab.</p>
+	<p>An optional options object that can be used to customize the behavior of the new tab. The available options include:</p>
+	<ul>
+	<li><strong>active</strong>: A boolean value indicating whether the new tab should be active (selected) or not. The default is false.</li>
+	<li><strong>insert</strong>: An integer indicating the position at which the new tab should be inserted in the tab strip. The default is false, which means the new tab will be added to the end of the tab strip.</li>
+	<li><strong>setParent</strong>: A boolean value indicating whether the new tab should be considered a child of the current tab. The default is false.</li>
+	<li><strong>incognito</strong> A boolean value that makes the tab being opened inside a incognito mode/private mode window.</li>
+	<li><strong>loadInBackground</strong> A boolean value has the opposite meaning of <strong>active</strong> and was added to achieve Greasemonkey 3.x compatibility.</li>
+	</ul>
+	<p>The function returns an object with the function <strong>close</strong>, the listener <strong>onclose</strong> and a flag called <strong>closed</strong>.</p>
+	<p>Here is an example of how the function might be used:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;Open&nbsp;a&nbsp;new&nbsp;tab&nbsp;and&nbsp;navigate&nbsp;to&nbsp;the&nbsp;specified&nbsp;URL</span>
+	<span class="hljs-title function_">GM_openInTab</span>(<span class="hljs-string">"https://www.example.com/"</span>);
+	</code></pre>
+	
+	
+	<h2 id="api:GM_registerMenuCommand">GM_registerMenuCommand(name, callback, options_or_accessKey)</h2>
+	<p><code>GM_registerMenuCommand</code> allows userscripts to add a new entry to the userscript's menu in the browser, and specify a function to be called when the menu item is selected.
+	Menu items created from different frames are merged into a single menu entry if name, title and accessKey are the same.</p>
+	<p>The function takes three parameters:</p>
+	<ul>
+	<li><strong>name</strong> - <em>string</em>, A string containing the text to display for the menu item.</li>
+	<li><strong>callback</strong> - <em>function</em>, A function to be called when the menu item is selected. The function will be passed a single parameter, which is the currently active tab. As of Tampermonkey 4.14 a MouseEvent or KeyboardEvent is passed as function argument.</li>
+	<li><strong>accessKey</strong> - <em>string?</em>, An optional access key. Please see the description below. Either <code>options</code> or <code>accessKey</code> can be specified.</li>
+	<li><strong>options</strong> <sup>v4.20+</sup> <em>object?</em>,  Optional options that can be used to customize the menu item. The options are specified as an object with the following properties:<ul>
+	<li><strong>id</strong> <sup>v5.0+</sup> <em>number|string?</em>, An optional number that was returned by a previous <code>GM_registerMenuCommand</code> call. If specified, the according menu item will be updated with the new options. If not specified or the menu item can't be found, a new menu item will be created.</li>
+	<li><strong>accessKey</strong> - <em>string?</em>, An optional access key for the menu item. This can be used to create a shortcut for the menu item. For example, if the access key is "s", the user can select the menu item by pressing "s" when Tampermonkey's popup-menu is open. Please note that there are browser-wide shortcuts configurable to open Tampermonkey's popup-menu. (<code>chrome://extensions/shortcuts</code> in Chrome, <code>about:addons</code> + "Manage Extension Shortcuts" in Firefox)</li>
+	<li><strong>autoClose</strong> - <em>boolean?</em>, An optional boolean parameter that specifies whether the popup menu should be closed after the menu item is clicked. The default value is <code>true</code>. Please note that this setting has no effect on the menu command section that is added to the page's context menu.</li>
+	<li><strong>title</strong> <sup>v5.0+</sup> - <em>string?</em>, An optional string that specifies the title of the menu item. This is displayed as a tooltip when the user hovers the mouse over the menu item.</li>
+	</ul>
+	</li>
+	</ul>
+	<p>The function return a menu entry ID that can be used to unregister the command.</p>
+	<p>Here is an example of how the function might be used:</p>
+	<pre><code class="hljs language-ts"><span class="hljs-keyword">const</span>&nbsp;menu_command_id_1&nbsp;=&nbsp;<span class="hljs-title function_">GM_registerMenuCommand</span>(<span class="hljs-string">"Show&nbsp;Alert"</span>,&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">event:&nbsp;MouseEvent&nbsp;|&nbsp;KeyboardEvent</span>)&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-title function_">alert</span>(<span class="hljs-string">"Menu&nbsp;item&nbsp;selected"</span>);
+	},&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-attr">accessKey</span>:&nbsp;<span class="hljs-string">"a"</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">autoClose</span>:&nbsp;<span class="hljs-literal">true</span>
+	});
+	
+	<span class="hljs-keyword">const</span>&nbsp;menu_command_id_2&nbsp;=&nbsp;<span class="hljs-title function_">GM_registerMenuCommand</span>(<span class="hljs-string">"Log"</span>,&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">event:&nbsp;MouseEvent&nbsp;|&nbsp;KeyboardEvent</span>)&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Menu&nbsp;item&nbsp;selected"</span>);
+	},&nbsp;<span class="hljs-string">"l"</span>);
+	</code></pre>
+	<h2 id="api:GM_unregisterMenuCommand">GM_unregisterMenuCommand(menuCmdId)</h2>
+	<p><code>GM_unregisterMenuCommand</code> removes an existing entry from the userscript's menu in the browser.</p>
+	<p>The function takes a single parameter, which is the ID of the menu item to remove.  It does not return a value.</p>
+	<p>Here is an example of how the function might be used:</p>
+	<pre><code class="hljs language-ts"><span class="hljs-keyword">const</span>&nbsp;menu_command_id&nbsp;=&nbsp;<span class="hljs-title function_">GM_registerMenuCommand</span>(...);
+	<span class="hljs-title function_">GM_unregisterMenuCommand</span>(menu_command_id);
+	</code></pre>
+	
+	
+	<h2 id="api:GM_setClipboard">GM_setClipboard(data, info, cb)</h2>
+	<p><code>GM_setClipboard</code> sets the text of the clipboard to a specified value.</p>
+	<p>The function takes a parameter <em>"data"</em>, which is the string to set as the clipboard text, a parameter <em>"info"</em> and an optional callback function <em>"cb"</em>.</p>
+	<p><em>"info</em>" can be just a string expressing the type <code>text</code> or <code>html</code> or an object like
+	<em>"cb"</em> is an optional callback function that is called when the clipboard has been set.</p>
+	<pre><code class="hljs language-ts">{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">type</span>:&nbsp;<span class="hljs-string">'text'</span>,
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-attr">mimetype</span>:&nbsp;<span class="hljs-string">'text/plain'</span>
+	}
+	</code></pre>
+	<pre><code class="hljs language-ts"><span class="hljs-title function_">GM_setClipboard</span>(<span class="hljs-string">"This&nbsp;is&nbsp;the&nbsp;clipboard&nbsp;text."</span>,&nbsp;<span class="hljs-string">"text"</span>,&nbsp;<span class="hljs-function">()&nbsp;=&gt;</span>&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"Clipboard&nbsp;set!"</span>));
+	<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">setClipboard</span>(<span class="hljs-string">"This&nbsp;is&nbsp;the&nbsp;newer&nbsp;clipboard&nbsp;text."</span>,&nbsp;<span class="hljs-string">"text"</span>);
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Clipboard&nbsp;set&nbsp;again!'</span>);
+	</code></pre>
+	
+	
+	<h2 id="api:GM_getTab">GM_getTab(callback)</h2>
+	<p>The GM_getTab function takes a single parameter, a callback function that will be called with an object that is persistent as long as this tab is open.</p>
+	<pre><code class="hljs language-ts"><span class="hljs-title function_">GM_getTab</span>(<span class="hljs-function">(<span class="hljs-params">tab</span>)&nbsp;=&gt;</span>&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(tab));
+	<span class="hljs-keyword">const</span>&nbsp;t&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">getTab</span>();
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(t);
+	</code></pre>
+	<h2 id="api:GM_saveTab">GM_saveTab(tab, cb)</h2>
+	<p>The <code>GM_saveTab</code> function allows a userscript to save information about a tab for later use.</p>
+	<p>The function takes a <em>"tab</em>" parameter, which is an object containing the information to be saved about the tab and an optional callback function <em>"cb"</em>.</p>
+	<p>The <code>GM_saveTab</code> function saves the provided tab information, so that it can be retrieved later using the <code>GM_getTab</code> function.</p>
+	<p>Here is an example of how the GM_saveTab function might be used in a userscript:</p>
+	<pre><code class="hljs language-ts"><span class="hljs-title function_">GM_getTab</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">tab</span>)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;tab.<span class="hljs-property">newInfo</span>&nbsp;=&nbsp;<span class="hljs-string">"new!"</span>;
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-title function_">GM_saveTab</span>(tab);
+	});
+	<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">saveTab</span>(tab);
+	</code></pre>
+	<p>In this example, the <code>GM_saveTab</code> function is called with the tab object returned by the <code>GM_getTab</code> function, and a new key called "newInfo".</p>
+	<h2 id="api:GM_getTabs">GM_getTabs(callback)</h2>
+	<p>The <code>GM_getTabs</code> function takes a single parameter: a callback function that will be called with the information about the tabs.</p>
+	<p>The <em>"tabs"</em> object that is passed to the callback function contains objects, with each object representing the saved tab information stored by <code>GM_saveTab</code>.</p>
+	<pre><code class="hljs language-ts"><span class="hljs-title function_">GM_getTabs</span>(<span class="hljs-function">(<span class="hljs-params">tabs</span>)&nbsp;=&gt;</span>&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">for</span>&nbsp;(<span class="hljs-keyword">const</span>&nbsp;[tabId,&nbsp;tab]&nbsp;<span class="hljs-keyword">of</span>&nbsp;<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(tabs))&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`tab&nbsp;<span class="hljs-subst">${tabId}</span>`</span>,&nbsp;tab);
+	&nbsp;&nbsp;&nbsp;&nbsp;}
+	});
+	<span class="hljs-keyword">const</span>&nbsp;tabs&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">getTabs</span>();
+	</code></pre>
+	
+	
+	<h2 id="api:GM_setValue">GM_setValue(key, value)</h2>
+	<p>The <code>GM_setValue</code> allows a userscript to set the value of a specific key in the userscript's storage.</p>
+	<p>The <code>GM_setValue</code> function takes two parameters:</p>
+	<ul>
+	<li>A string specifying the key for which the value should be set.</li>
+	<li>The value to be set for the key. Values (including nested object properties) can be <code>null</code> or of type "object", "string", "number", "undefined" or "boolean".</li>
+	</ul>
+	<p>The <code>GM_setValue</code> function does not return any value. Instead, it sets the provided value for the specified key in the userscript's storage.</p>
+	<p>Here is an example of how <code>GM_setValue</code> and its async pendant <code>GM.setValue</code> might be used in a userscript:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_setValue</span>(<span class="hljs-string">"someKey"</span>,&nbsp;<span class="hljs-string">"someData"</span>);
+	<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">setValue</span>(<span class="hljs-string">"otherKey"</span>,&nbsp;<span class="hljs-string">"otherData"</span>);
+	</code></pre>
+	<h2 id="api:GM_getValue">GM_getValue(key, defaultValue)</h2>
+	<p>The <code>GM_getValue</code> function allows a userscript to retrieve the value of a specific key in the userscript's storage.
+	It takes two parameters:</p>
+	<ul>
+	<li>A string specifying the key for which the value should be retrieved.</li>
+	<li>A default value to be returned if the key does not exist in the userscript's storage. This default value can be of any type (string, number, object, etc.).</li>
+	</ul>
+	<p>The <code>GM_getValue</code> function returns the value of the specified key from the userscript's storage, or the default value if the key does not exist.</p>
+	<p>Here is an example of how the <code>GM_getValue</code> function might be used in a userscript:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-keyword">const</span>&nbsp;someKey&nbsp;=&nbsp;<span class="hljs-title function_">GM_getValue</span>(<span class="hljs-string">"someKey"</span>,&nbsp;<span class="hljs-literal">null</span>);
+	<span class="hljs-keyword">const</span>&nbsp;otherKey&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">getValue</span>(<span class="hljs-string">"otherKey"</span>,&nbsp;<span class="hljs-literal">null</span>);
+	</code></pre>
+	<p>In this example, the <code>GM_getValue</code> function is called with the key "someKey" and a default value of null.
+	If the "someKey" key exists in the userscript's storage, its value will be returned and stored in the someKey variable.
+	If the key does not exist, the default value of null will be returned and stored in the savedTab variable.</p>
+	<h2 id="api:GM_deleteValue">GM_deleteValue(key)</h2>
+	<p>Deletes <em>"key"</em> from the userscript's storage.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_deleteValue</span>(<span class="hljs-string">"someKey"</span>);
+	<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">deleteValue</span>(<span class="hljs-string">"otherKey"</span>);
+	</code></pre>
+	<h2 id="api:GM_listValues">GM_listValues()</h2>
+	<p>The <code>GM_listValues</code> function returns a list of keys of all stored data.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-keyword">const</span>&nbsp;keys&nbsp;=&nbsp;<span class="hljs-title function_">GM_listValues</span>();
+	<span class="hljs-keyword">const</span>&nbsp;asyncKeys&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">listValues</span>();
+	</code></pre>
+	<h2 id="api:GM_setValues">GM_setValues(values) <sup>v5.3+</sup></h2>
+	<p>The <code>GM_setValues</code> function allows a userscript to set multiple key-value pairs in the userscript's storage simultaneously.</p>
+	<p>The <code>GM_setValues</code> function takes one parameter:</p>
+	<ul>
+	<li>An object where each key-value pair corresponds to a key and the value to be set for that key. Values (including nested object properties) can be <code>null</code> or of type "object", "string", "number", "undefined" or "boolean".</li>
+	</ul>
+	<p>The <code>GM_setValues</code> function does not return any value. Instead, it sets the provided values for the specified keys in the userscript's storage.</p>
+	<p>Here is an example of how <code>GM_setValues</code> and its async counterpart <code>GM.setValues</code> might be used in a userscript:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_setValues</span>({&nbsp;<span class="hljs-attr">foo</span>:&nbsp;<span class="hljs-number">1</span>,&nbsp;<span class="hljs-attr">bar</span>:&nbsp;<span class="hljs-number">2</span>&nbsp;});
+	<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">setValues</span>({&nbsp;<span class="hljs-attr">foo</span>:&nbsp;<span class="hljs-number">1</span>,&nbsp;<span class="hljs-attr">bar</span>:&nbsp;<span class="hljs-number">2</span>&nbsp;});
+	</code></pre>
+	<h2 id="api:GM_getValues">GM_getValues(keysOrDefaults) <sup>v5.3+</sup></h2>
+	<p>The <code>GM_getValues</code> function allows a userscript to retrieve the values of multiple keys in the userscript's storage. It can also provide default values if the keys do not exist.</p>
+	<p>The <code>GM_getValues</code> function takes one parameter:</p>
+	<ul>
+	<li>Either an array of strings specifying the keys for which the values should be retrieved, or an object specifying the default values to be returned if the keys do not exist. This default values object can contain keys of any type (string, number, object, etc.).</li>
+	</ul>
+	<p>The <code>GM_getValues</code> function returns an object containing the values of the specified keys from the userscript's storage, or the default values if the keys do not exist.</p>
+	<p>Here is an example of how the <code>GM_getValues</code> function might be used in a userscript:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-keyword">const</span>&nbsp;values&nbsp;=&nbsp;<span class="hljs-title function_">GM_getValues</span>([<span class="hljs-string">'foo'</span>,&nbsp;<span class="hljs-string">'bar'</span>]);
+	<span class="hljs-keyword">const</span>&nbsp;asyncValues&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">getValues</span>([<span class="hljs-string">'foo'</span>,&nbsp;<span class="hljs-string">'bar'</span>]);
+	
+	<span class="hljs-keyword">const</span>&nbsp;defaultValues&nbsp;=&nbsp;<span class="hljs-title function_">GM_getValues</span>({&nbsp;<span class="hljs-attr">foo</span>:&nbsp;<span class="hljs-number">1</span>,&nbsp;<span class="hljs-attr">bar</span>:&nbsp;<span class="hljs-number">2</span>,&nbsp;<span class="hljs-attr">baz</span>:&nbsp;<span class="hljs-number">3</span>&nbsp;});
+	<span class="hljs-keyword">const</span>&nbsp;asyncDefaultValues&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">getValues</span>({&nbsp;<span class="hljs-attr">foo</span>:&nbsp;<span class="hljs-number">1</span>,&nbsp;<span class="hljs-attr">bar</span>:&nbsp;<span class="hljs-number">2</span>,&nbsp;<span class="hljs-attr">baz</span>:&nbsp;<span class="hljs-number">3</span>&nbsp;});
+	</code></pre>
+	<p>In this example, the <code>GM_getValues</code> function is called with an array of keys or an object of default values. It returns an object with the values of the specified keys or the default values if the keys do not exist.</p>
+	<h2 id="api:GM_deleteValues">GM_deleteValues(keys) <sup>v5.3+</sup></h2>
+	<p>The <code>GM_deleteValues</code> function allows a userscript to delete multiple keys from the userscript's storage simultaneously.</p>
+	<p>The <code>GM_deleteValues</code> function takes one parameter:</p>
+	<ul>
+	<li>An array of strings specifying the keys to be deleted from the userscript's storage.</li>
+	</ul>
+	<p>The <code>GM_deleteValues</code> function does not return any value. Instead, it deletes the specified keys from the userscript's storage.</p>
+	<p>Here is an example of how <code>GM_deleteValues</code> and its async counterpart GM.deleteValues might be used in a userscript:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_deleteValues</span>([<span class="hljs-string">'foo'</span>,&nbsp;<span class="hljs-string">'bar'</span>]);
+	<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">deleteValues</span>([<span class="hljs-string">'foo'</span>,&nbsp;<span class="hljs-string">'bar'</span>]);
+	</code></pre>
+	<h2 id="api:GM_addValueChangeListener">GM_addValueChangeListener(key, (key, old_value, new_value, remote) =&gt; void)</h2>
+	<p>The <code>GM_addValueChangeListener</code> function allows a userscript to add a listener for changes to the value of a specific key in the userscript's storage.</p>
+	<p>The function takes two parameters:</p>
+	<ul>
+	<li>A string specifying the key for which changes should be monitored.</li>
+	<li>A callback function that will be called when the value of the key changes. The callback function should have the following signature:<pre><code class="language-ts hljs">&nbsp;&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">key,&nbsp;oldValue,&nbsp;newValue,&nbsp;remote</span>)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;key&nbsp;is&nbsp;the&nbsp;key&nbsp;whose&nbsp;value&nbsp;has&nbsp;changed</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;oldValue&nbsp;is&nbsp;the&nbsp;previous&nbsp;value&nbsp;of&nbsp;the&nbsp;key</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;newValue&nbsp;is&nbsp;the&nbsp;new&nbsp;value&nbsp;of&nbsp;the&nbsp;key</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;remote&nbsp;is&nbsp;a&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;change&nbsp;originated&nbsp;from&nbsp;a&nbsp;different&nbsp;userscript&nbsp;instance</span>
+	&nbsp;&nbsp;}
+	</code></pre>
+	</li>
+	</ul>
+	<p>The <code>GM_addValueChangeListener</code> function returns a <em>"listenerId"</em> value that can be used to remove the listener later using the <code>GM_removeValueChangeListener</code> function.
+	The very same applies to <code>GM.addValueChangeListener</code> and <code>GM.removeValueChangeListener</code> with the only difference that both return a promise;</p>
+	<p>Here is an example of how the <code>GM_addValueChangeListener</code> function might be used in a userscript:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;Add&nbsp;a&nbsp;listener&nbsp;for&nbsp;changes&nbsp;to&nbsp;the&nbsp;"savedTab"&nbsp;key</span>
+	<span class="hljs-keyword">var</span>&nbsp;listenerId&nbsp;=&nbsp;<span class="hljs-title function_">GM_addValueChangeListener</span>(<span class="hljs-string">"savedTab"</span>,&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">key,&nbsp;oldValue,&nbsp;newValue,&nbsp;remote</span>)&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;Print&nbsp;a&nbsp;message&nbsp;to&nbsp;the&nbsp;console&nbsp;when&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;"savedTab"&nbsp;key&nbsp;changes</span>
+	&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">"The&nbsp;value&nbsp;of&nbsp;the&nbsp;'"</span>&nbsp;+&nbsp;key&nbsp;+&nbsp;<span class="hljs-string">"'&nbsp;key&nbsp;has&nbsp;changed&nbsp;from&nbsp;'"</span>&nbsp;+&nbsp;oldValue&nbsp;+&nbsp;<span class="hljs-string">"'&nbsp;to&nbsp;'"</span>&nbsp;+&nbsp;newValue&nbsp;+&nbsp;<span class="hljs-string">"'"</span>);
+	});
+	</code></pre>
+	<p><code>GM_addValueChangeListener</code> can be used by userscripts to communicate with other userscript instances at other tabs.</p>
+	<h2 id="api:GM_removeValueChangeListener">GM_removeValueChangeListener(listenerId)</h2>
+	<p><code>GM_removeValueChangeListener</code> and <code>GM.removeValueChangeListener</code> both get one argument called <em>"listenerId"</em> and remove the change listener with this ID.</p>
+	
+	
+	<h2 id="api:GM_xmlhttpRequest">GM_xmlhttpRequest(details)</h2>
+	<p>The <code>GM_xmlhttpRequest</code> allows a userscripts to send an HTTP request and handle the response.
+	The function takes a single parameter: an object containing the details of the request to be sent and the callback functions to be called when the response is received.</p>
+	<p>The object can have the following properties:</p>
+	<ul>
+	<li><strong>method</strong> - <em>string</em>, usually one of GET, HEAD, POST, PUT, DELETE, ...</li>
+	<li><strong>url</strong> - <em>string|URL|File|Blob</em>, the destination URL or a <code>Blob</code> or <code>File</code> object<sup>v5.4.6226+</sup></li>
+	<li><strong>headers</strong> e.g. <code>user-agent</code>, <code>referer</code>, ...
+	(some special headers are not supported by Safari and Android browsers)</li>
+	<li><strong>data</strong> - <em>string|Blob|File|Object|Array|FormData|URLSearchParams?</em>, some data to send via a POST request</li>
+	<li><strong>redirect</strong> one of <code>follow</code>, <code>error</code> or <code>manual</code>; controls what to happen when a redirect is detected (build 6180+, enforces <code>fetch</code> mode)</li>
+	<li><strong>cookie</strong> a cookie to be patched into the sent cookie set</li>
+	<li><strong>cookiePartition</strong> <sup>v5.2+</sup> <em>object</em>?, containing the partition key to be used for sent and received <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/cookies#storage_partitioning">partitioned cookies</a><ul>
+	<li><strong>topLevelSite</strong> <em>string</em>?, representing the top frame site for partitioned cookies</li>
+	</ul>
+	</li>
+	<li><strong>binary</strong> send the data string in binary mode</li>
+	<li><strong>nocache</strong> don't cache the resource</li>
+	<li><strong>revalidate</strong> revalidate maybe cached content</li>
+	<li><strong>timeout</strong> a timeout in ms</li>
+	<li><strong>context</strong> a property which will be added to the response object</li>
+	<li><strong>responseType</strong> one of <code>arraybuffer</code>, <code>blob</code>, <code>json</code> or <code>stream</code></li>
+	<li><strong>overrideMimeType</strong> a MIME type for the request</li>
+	<li><strong>anonymous</strong> don't send cookies with the request (enforces <code>fetch</code> mode)</li>
+	<li><strong>fetch</strong> use a <code>fetch</code> instead of a <code>XMLHttpRequest</code> request
+	(at Chrome this causes <code>details.timeout</code> and <code>xhr.onprogress</code> to not work and makes <code>xhr.onreadystatechange</code> receive only <code>readyState</code> <code>DONE</code> (==4) events)</li>
+	<li><strong>user</strong> a user name for authentication</li>
+	<li><strong>password</strong> a password</li>
+	<li><strong>onabort</strong> callback to be executed if the request was aborted</li>
+	<li><strong>onerror</strong> callback to be executed if the request ended up with an error</li>
+	<li><strong>onloadstart</strong> callback to be executed on load start, provides access to the stream object if responseType is set to <code>stream</code></li>
+	<li><strong>onprogress</strong> callback to be executed if the request made some progress</li>
+	<li><strong>onreadystatechange</strong> callback to be executed if the request's <code>readyState</code> changed</li>
+	<li><strong>ontimeout</strong> callback to be executed if the request failed due to a timeout</li>
+	<li><strong>onload</strong> callback to be executed if the request was loaded.<pre><code class="language-ts hljs">&nbsp;&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;response&nbsp;is&nbsp;an&nbsp;object&nbsp;containing&nbsp;the&nbsp;details&nbsp;of&nbsp;the&nbsp;response</span>
+	&nbsp;&nbsp;}
+	</code></pre>
+	<strong>response</strong> has the following attributes:<ul>
+	<li><strong>finalUrl</strong> - the final URL after all redirects from where the data was loaded</li>
+	<li><strong>readyState</strong> - the request's <code>readyState</code></li>
+	<li><strong>status</strong> - the request's status</li>
+	<li><strong>statusText</strong> - the request's status text</li>
+	<li><strong>responseHeaders</strong> - the request's response headers</li>
+	<li><strong>response</strong> - the response data as object if <code>details.responseType</code> was set</li>
+	<li><strong>responseXML</strong> - the response data as XML document</li>
+	<li><strong>responseText</strong> - the response data as plain string</li>
+	</ul>
+	</li>
+	</ul>
+	<p><code>GM_xmlhttpRequest</code> returns an object with the following property:</p>
+	<ul>
+	<li><strong>abort</strong> - function to be called to cancel this request</li>
+	</ul>
+	<p><code>GM.xmlHttpRequest</code> returns a promise that resolves to the response and also has an <code>abort</code> function.</p>
+	<p>Here is an example of how the <code>GM_xmlhttpRequest</code> function might be used in a userscript:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_xmlhttpRequest</span>({
+	&nbsp;&nbsp;<span class="hljs-attr">method</span>:&nbsp;<span class="hljs-string">"GET"</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">url</span>:&nbsp;<span class="hljs-string">"https://example.com/"</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">headers</span>:&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-string">"Content-Type"</span>:&nbsp;<span class="hljs-string">"application/json"</span>
+	&nbsp;&nbsp;},
+	&nbsp;&nbsp;<span class="hljs-attr">onload</span>:&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">response</span>)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(response.<span class="hljs-property">responseText</span>);
+	&nbsp;&nbsp;}
+	});
+	
+	<span class="hljs-keyword">const</span>&nbsp;r&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-title function_">xmlHttpRequest</span>({&nbsp;<span class="hljs-attr">url</span>:&nbsp;<span class="hljs-string">"https://example.com/"</span>&nbsp;}).<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">e</span>&nbsp;=&gt;</span>&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(e));
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(r.<span class="hljs-property">responseText</span>);
+	</code></pre>
+	<p><strong>Note:</strong> the <code>synchronous</code> flag at <code>details</code> is not supported</p>
+	<p><strong>Important:</strong>:</p>
+	<ul>
+	<li>If you want to use this method then please also check the documentation about <a href="#meta:connect"><code>@connect</code></a></li>
+	<li>The promise-based version of this function is called <code>GM.xmlHttpRequest</code> (with a uppercase "h" in "http")</li>
+	</ul>
+	
+	
+	<h2 id="api:GM_webRequest">GM_webRequest(rules, listener)</h2>
+	<p>Note: this API is experimental and might change at any time. It is also not available anymore at Manifest v3 versions of Tampermonkey 5.2+ (Chrome and derivates).</p>
+	<p><code>GM_webRequest</code> (re-)registers rules for web request manipulations and the listener of triggered rules.
+	If you need to just register rules it's better to use <code>@webRequest</code> header.
+	Note, webRequest proceeds only requests with types <code>sub_frame</code>, <code>script</code>, <code>xhr</code> and <code>websocket</code>.</p>
+	<h3 id="parameters">Parameters:</h3>
+	<ul>
+	<li><strong>rules</strong> - <em>object[]</em>, array of rules with following properties:<ul>
+	<li><strong>selector</strong> - <em>string|object</em>, for which URLs the rule should be triggered, string value is shortening for <code>{ include: [selector] }</code>, object properties:<ul>
+	<li><strong>include</strong> - <em>string|string[]</em>, URLs, patterns, and regexpes for rule triggering;</li>
+	<li><strong>match</strong> - <em>string|string[]</em>, URLs and patterns for rule trigering;</li>
+	<li><strong>exclude</strong> - <em>string|string[]</em>, URLs, patterns, and regexpes for not triggering the rule;</li>
+	</ul>
+	</li>
+	<li><strong>action</strong> - <em>string|object</em>, what to do with the request, string value <code>"cancel"</code> is shortening for <code>{ cancel: true }</code>, object properties:<ul>
+	<li><strong>cancel</strong> - <em>boolean</em>, whether to cancel the request;</li>
+	<li><strong>redirect</strong> - <em>string|object</em>, redirect to some URL which must be included in any @match or @include header. When a string, redirects to the static URL. If object:<ul>
+	<li><strong>from</strong> - <em>string</em>, a regexp to extract some parts of the URL, e.g. <code>"([^:]+)://match.me/(.*)"</code>;</li>
+	<li><strong>to</strong> - <em>string</em>, pattern for substitution, e.g. <code>"$1://redirected.to/$2"</code>;</li>
+	</ul>
+	</li>
+	</ul>
+	</li>
+	</ul>
+	</li>
+	<li><strong>listener</strong> - <em>function</em>, is called when the rule is triggered, cannot impact on the rule action, arguments:<ul>
+	<li><strong>info</strong> - <em>string</em>, type of action: <code>"cancel"</code>, <code>"redirect"</code>;</li>
+	<li><strong>message</strong> - <em>string</em>, <code>"ok"</code> or <code>"error"</code>;</li>
+	<li><strong>details</strong> - <em>object</em>, info about the request and rule:<ul>
+	<li><strong>rule</strong> - <em>object</em>, the triggered rule;</li>
+	<li><strong>url</strong> - <em>string</em>, URL of the request;</li>
+	<li><strong>redirect_url</strong> - <em>string</em>, where the request was redirected;</li>
+	<li><strong>description</strong> - <em>string</em>, error description.</li>
+	</ul>
+	</li>
+	</ul>
+	</li>
+	</ul>
+	<h3 id="example">Example</h3>
+	<pre><code class="language-ts hljs"><span class="hljs-title function_">GM_webRequest</span>([
+	&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span class="hljs-attr">selector</span>:&nbsp;<span class="hljs-string">'*cancel.me/*'</span>,&nbsp;<span class="hljs-attr">action</span>:&nbsp;<span class="hljs-string">'cancel'</span>&nbsp;},
+	&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span class="hljs-attr">selector</span>:&nbsp;{&nbsp;<span class="hljs-attr">include</span>:&nbsp;<span class="hljs-string">'*'</span>,&nbsp;<span class="hljs-attr">exclude</span>:&nbsp;<span class="hljs-string">'http://exclude.me/*'</span>&nbsp;},&nbsp;<span class="hljs-attr">action</span>:&nbsp;{&nbsp;<span class="hljs-attr">redirect</span>:&nbsp;<span class="hljs-string">'http://new_static.url'</span>&nbsp;}&nbsp;},
+	&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span class="hljs-attr">selector</span>:&nbsp;{&nbsp;<span class="hljs-attr">match</span>:&nbsp;<span class="hljs-string">'*://match.me/*'</span>&nbsp;},&nbsp;<span class="hljs-attr">action</span>:&nbsp;{&nbsp;<span class="hljs-attr">redirect</span>:&nbsp;{&nbsp;<span class="hljs-attr">from</span>:&nbsp;<span class="hljs-string">'([^:]+)://match.me/(.*)'</span>,&nbsp;&nbsp;<span class="hljs-attr">to</span>:&nbsp;<span class="hljs-string">'$1://redirected.to/$2'</span>&nbsp;}&nbsp;}&nbsp;}
+	],&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">info,&nbsp;message,&nbsp;details</span>)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(info,&nbsp;message,&nbsp;details);
+	});
+	</code></pre>
+	
+	
+	<h2 id="api:GM_cookie.list">GM_cookie.list(details[, callback])</h2>
+	
+	<p>Note: <code>httpOnly</code> cookies are supported at the BETA versions of Tampermonkey only for now</p>
+	<p>Tampermonkey checks if the script has <code>@include</code> or <code>@match</code> access to given <code>details.url</code> arguments!</p>
+	<h3 id="parameters">Parameters:</h3>
+	<ul>
+	<li><strong>details</strong> <em>object</em>, containing properties of the cookies to retrieve<ul>
+	<li><strong>url</strong> <em>string?</em>, representing the URL to retrieve cookies from (defaults to current document URL)</li>
+	<li><strong>domain</strong> <em>string?</em>, representing the domain of the cookies to retrieve</li>
+	<li><strong>name</strong> <em>string?</em>, representing the name of the cookies to retrieve</li>
+	<li><strong>path</strong> <em>string?</em>, representing the path of the cookies to retrieve</li>
+	<li><strong>partitionKey</strong> <sup>v5.2+</sup> <em>object</em>?, representing the <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/cookies#storage_partitioning">partition key</a> of the cookies, use an empty object to retrieve all cookies<ul>
+	<li><strong>topLevelSite</strong> <em>string</em>?, representing the top frame site of the cookies</li>
+	</ul>
+	</li>
+	</ul>
+	</li>
+	<li><strong>callback</strong> <em>function?</em>, to be called when the cookies have been retrieved. The function will be passed two arguments:<ul>
+	<li><strong>cookies</strong> <em>object[]</em>, representing the retrieved cookies</li>
+	<li><strong>error</strong> <em>string</em>, representing an error message if an error occurred, null otherwise.</li>
+	</ul>
+	</li>
+	</ul>
+	<p>The cookie objects have the following properties:</p>
+	<ul>
+	<li><strong>domain</strong> <em>string</em>, representing the domain of the cookie</li>
+	<li><strong>expirationDate</strong> <em>number?</em>, the expiration date of the cookie in seconds since the Unix epoch. If not specified, the cookie never expires.</li>
+	<li><strong>firstPartyDomain</strong> <em>string?</em>: the first party domain of the cookie.</li>
+	<li><strong>partitionKey</strong> <sup>v5.2+</sup> <em>object</em>?, containing the partition key of the cookie<ul>
+	<li><strong>topLevelSite</strong> <em>string</em>?, representing the top frame site of the cookie</li>
+	</ul>
+	</li>
+	<li><strong>hostOnly</strong> <em>boolean</em>, indicating whether the cookie is a host-only cookie</li>
+	<li><strong>httpOnly</strong> <em>boolean</em>, indicating whether the cookie is an HTTP-only cookie</li>
+	<li><strong>name</strong> <em>string</em>, representing the name of the cookie</li>
+	<li><strong>path</strong> <em>string</em>, representing the path of the cookie</li>
+	<li><strong>sameSite</strong> <em>string</em>, indicating the SameSite attribute of the cookie</li>
+	<li><strong>secure</strong> <em>boolean</em>, indicating whether the cookie requires a secure connection</li>
+	<li><strong>session</strong> <em>boolean</em>, indicating whether the cookie is a session cookie</li>
+	<li><strong>value</strong> <em>string</em>, representing the value of the cookie</li>
+	</ul>
+	<h3 id="example-usage">Example usage:</h3>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;Retrieve&nbsp;all&nbsp;cookies&nbsp;with&nbsp;name&nbsp;"mycookie"</span>
+	GM_cookie.<span class="hljs-title function_">list</span>({&nbsp;<span class="hljs-attr">name</span>:&nbsp;<span class="hljs-string">"mycookie"</span>&nbsp;},&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">cookies,&nbsp;error</span>)&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-keyword">if</span>&nbsp;(!error)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(cookies);
+	&nbsp;&nbsp;}&nbsp;<span class="hljs-keyword">else</span>&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
+	&nbsp;&nbsp;}
+	});
+	
+	<span class="hljs-comment">//&nbsp;Retrieve&nbsp;all&nbsp;cookies&nbsp;for&nbsp;the&nbsp;current&nbsp;domain</span>
+	<span class="hljs-keyword">const</span>&nbsp;cookies&nbsp;=&nbsp;<span class="hljs-keyword">await</span>&nbsp;<span class="hljs-variable constant_">GM</span>.<span class="hljs-property">cookie</span>.<span class="hljs-title function_">list</span>()
+	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(cookies);
+	</code></pre>
+	<h2 id="api:GM_cookie.set">GM_cookie.set(details[, callback])</h2>
+	
+	<p>Sets a cookie with the given details. Supported properties are defined <a href="https://developer.chrome.com/extensions/cookies#method-set">here</a>.</p>
+	<h3 id="parameters-1">Parameters:</h3>
+	<ul>
+	<li><strong>details</strong>: An object containing the details of the cookie to be set. The object can have the following properties:<ul>
+	<li><strong>url</strong> <em>string?</em>, the URL to associate the cookie with. If not specified, the cookie is associated with the current document's URL.</li>
+	<li><strong>name</strong> <em>string</em>, the name of the cookie.</li>
+	<li><strong>value</strong> <em>string</em>, the value of the cookie.</li>
+	<li><strong>domain</strong> <em>string?</em>, the domain of the cookie.</li>
+	<li><strong>firstPartyDomain</strong> <em>string?</em>: the first party domain of the cookie.</li>
+	<li><strong>partitionKey</strong> <sup>v5.2+</sup> <em>object</em>?, containing the <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/cookies#storage_partitioning">partition key of the cookie</a><ul>
+	<li><strong>topLevelSite</strong> <em>string</em>?, representing the top frame site of the cookie</li>
+	</ul>
+	</li>
+	<li><strong>path</strong> <em>string?</em>, the path of the cookie.</li>
+	<li><strong>secure</strong> <em>boolean?</em>, whether the cookie should only be sent over HTTPS.</li>
+	<li><strong>httpOnly</strong> <em>boolean?</em>, whether the cookie should be marked as HttpOnly.</li>
+	<li><strong>expirationDate</strong> <em>number?</em>, the expiration date of the cookie in seconds since the Unix epoch. If not specified, the cookie never expires.</li>
+	</ul>
+	</li>
+	<li><strong>callback</strong> <em>function?</em>, a function to be called when the operation is complete. The function is passed one argument:<ul>
+	<li><strong>error</strong> <em>string?</em>, if there was an error setting the cookie, this contains an error message. Otherwise, it is <code>undefined</code>.</li>
+	</ul>
+	</li>
+	</ul>
+	<h3 id="example">Example:</h3>
+	<pre><code class="language-ts hljs">GM_cookie.<span class="hljs-title function_">set</span>({
+	&nbsp;&nbsp;<span class="hljs-attr">url</span>:&nbsp;<span class="hljs-string">'https://example.com'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">name</span>:&nbsp;<span class="hljs-string">'name'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">value</span>:&nbsp;<span class="hljs-string">'value'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">domain</span>:&nbsp;<span class="hljs-string">'.example.com'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">path</span>:&nbsp;<span class="hljs-string">'/'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">secure</span>:&nbsp;<span class="hljs-literal">true</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">httpOnly</span>:&nbsp;<span class="hljs-literal">true</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">expirationDate</span>:&nbsp;<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>()&nbsp;/&nbsp;<span class="hljs-number">1000</span>)&nbsp;+&nbsp;(<span class="hljs-number">60</span>&nbsp;*&nbsp;<span class="hljs-number">60</span>&nbsp;*&nbsp;<span class="hljs-number">24</span>&nbsp;*&nbsp;<span class="hljs-number">30</span>)&nbsp;<span class="hljs-comment">//&nbsp;Expires&nbsp;in&nbsp;30&nbsp;days</span>
+	},&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>)&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-keyword">if</span>&nbsp;(error)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
+	&nbsp;&nbsp;}&nbsp;<span class="hljs-keyword">else</span>&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Cookie&nbsp;set&nbsp;successfully.'</span>);
+	&nbsp;&nbsp;}
+	});
+	
+	<span class="hljs-variable constant_">GM</span>.<span class="hljs-property">cookie</span>.<span class="hljs-title function_">set</span>({
+	&nbsp;&nbsp;<span class="hljs-attr">name</span>:&nbsp;<span class="hljs-string">'name'</span>,
+	&nbsp;&nbsp;<span class="hljs-attr">value</span>:&nbsp;<span class="hljs-string">'value'</span>
+	})
+	.<span class="hljs-title function_">then</span>(<span class="hljs-function">()&nbsp;=&gt;</span>&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Cookie&nbsp;set&nbsp;successfully.'</span>);
+	})
+	.<span class="hljs-title function_">catch</span>(<span class="hljs-function">(<span class="hljs-params">error</span>)&nbsp;=&gt;</span>&nbsp;{
+	&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
+	});
+	</code></pre>
+	<h2 id="api:GM_cookie.delete">GM_cookie.delete(details, callback)</h2>
+	
+	<p>Deletes a cookie.</p>
+	<h3 id="parameters-2">Parameters:</h3>
+	<p>The <code>details</code> object can have the following properties:</p>
+	<ul>
+	<li><strong>url</strong> <em>string?</em>, the URL associated with the cookie. If <code>url</code> is not specified, the current document's URL will be used.</li>
+	<li><strong>name</strong> <em>string</em>, the name of the cookie to delete.</li>
+	<li><strong>firstPartyDomain</strong> <em>string?</em>: the first party domain of the cookie to delete.</li>
+	<li><strong>partitionKey</strong> <sup>v5.2+</sup> <em>object</em>?, representing the partition key of the cookie to delete<ul>
+	<li><strong>topLevelSite</strong> <em>string</em>?, representing the top frame site of the cookies</li>
+	</ul>
+	</li>
+	</ul>
+	<p>The <code>callback</code> function is optional and will be called when the cookie has been deleted or an error has occurred. It takes one argument:</p>
+	<ul>
+	<li><strong>error</strong> <em>string?</em>, an error message, or <code>undefined</code> if the cookie was deleted successfully.</li>
+	</ul>
+	<h3 id="example-1">Example:</h3>
+	<pre><code class="language-ts hljs">GM_cookie.<span class="hljs-title function_">delete</span>({&nbsp;<span class="hljs-attr">name</span>:&nbsp;<span class="hljs-string">'cookie_name'</span>&nbsp;},&nbsp;<span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword">if</span>&nbsp;(error)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error);
+	&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="hljs-keyword">else</span>&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">'Cookie&nbsp;deleted&nbsp;successfully'</span>);
+	&nbsp;&nbsp;&nbsp;&nbsp;}
+	});
+	</code></pre>
+	
+	
+	<h2 id="api:window.onurlchange">window.onurlchange</h2>
+	
+	<p>If a script runs on a single-page application, then it can use <code>window.onurlchange</code> to listen for URL changes:</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;==UserScript==</span>
+	...
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;window.onurlchange</span>
+	<span class="hljs-comment">//&nbsp;==/UserScript==</span>
+	
+	<span class="hljs-keyword">if</span>&nbsp;(<span class="hljs-variable language_">window</span>.<span class="hljs-property">onurlchange</span>&nbsp;===&nbsp;<span class="hljs-literal">null</span>)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment">//&nbsp;feature&nbsp;is&nbsp;supported</span>
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'urlchange'</span>,&nbsp;<span class="hljs-function">(<span class="hljs-params">info</span>)&nbsp;=&gt;</span>&nbsp;...);
+	}
+	</code></pre>
+	<h2 id="api:window.close">window.close</h2>
+	
+	<p>Usually JavaScript is not allowed to close tabs via <code>window.close</code>.
+	Userscripts, however, can do this if the permission is requested via <code>@grant</code>.</p>
+	<p>Note: for security reasons it is not allowed to close the last tab of a window.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;==UserScript==</span>
+	...
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;window.close</span>
+	<span class="hljs-comment">//&nbsp;==/UserScript==</span>
+	
+	<span class="hljs-keyword">if</span>&nbsp;(condition)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">window</span>.<span class="hljs-title function_">close</span>();
+	}
+	</code></pre>
+	<h2 id="api:window.focus">window.focus</h2>
+	
+	<p><code>window.focus</code> brings the window to the front, while <code>unsafeWindow.focus</code> may fail due to user settings.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-comment">//&nbsp;==UserScript==</span>
+	...
+	<span class="hljs-comment">//&nbsp;@grant&nbsp;window.focus</span>
+	<span class="hljs-comment">//&nbsp;==/UserScript==</span>
+	
+	<span class="hljs-keyword">if</span>&nbsp;(condition)&nbsp;{
+	&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-variable language_">window</span>.<span class="hljs-title function_">focus</span>();
+	}
+	</code></pre>
+	
+	
+	<h2 id="api:CDATA">&lt;&gt;&lt;![CDATA[...]]&gt;&lt;/&gt;</h2>
+	<p>CDATA-based way of storing meta data is supported via compatibility option.
+	Tampermonkey tries to automatically detect whether a script needs this option to be enabled.</p>
+	<pre><code class="language-ts hljs"><span class="hljs-keyword">var</span>&nbsp;inline_src&nbsp;=&nbsp;(&lt;&gt;&lt;![CDATA[
+	&nbsp;&nbsp;&nbsp;&nbsp;console.log('Hello&nbsp;World!');
+	]]&gt;&lt;/&gt;).<span class="hljs-title function_">toString</span>();
+	
+	<span class="hljs-built_in">eval</span>(inline_src);
+	</code></pre>
+	
+	</div>
+</body>
+</html>
