@@ -38,8 +38,8 @@
 			//地图投影类型：
 			//EqualEarth、Orthographic、NaturalEarth1、Mercator、Albers、Eckert6、Miller
 			//AzimuthalEqualArea、Projection、Stereographic
-			chart.projection = new am4maps.projections.NaturalEarth1();
-			chart.panBehavior = 'rotateLong'; // 拖拽旋转地球		rotateLongLat	
+			chart.projection = new am4maps.projections.Orthographic();
+			chart.panBehavior = 'rotateLongLat'; // 拖拽旋转地球		rotateLongLat	
 			// 海洋背景（球体内部灰色）
 			chart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color('#999');
 			chart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 0.1; // 普通经纬网格
@@ -87,10 +87,10 @@
 						property: 'deltaLongitude',
 						to: -dataItem.longitude - long
 					}, 500, am4core.ease.circleInOut);
-					// chart.animate({
-					// 	property: 'deltaLatitude',
-					// 	to: -dataItem.latitude + 8
-					// }, 500, am4core.ease.circleInOut);
+					chart.animate({
+						property: 'deltaLatitude',
+						to: -dataItem.latitude + 8
+					}, 500, am4core.ease.circleInOut);
 					previousPolygon = dataItem;
 				}
 			}
@@ -116,5 +116,6 @@
 	</body>
 
 </html>
+
 
 
