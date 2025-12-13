@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+				overflow: hidden;
+			}
+
+			#chartdiv {
+				width: 100vw;
+				/* max-width: 100vh; */
+				height: 100vmin;
+				/* max-height: 100vw; */
+				box-sizing: border-box;
+				padding: 50px;
+				margin: auto;
+			}
+		</style>
+		<script src="core4.js"></script>
+		<script src="maps4.js"></script>
+		<script src="worldLow.js"></script>
+	</head>
+	<body>
+		<div id="chartdiv"></div>
+		<script>
+			// am4core.useTheme(am4themes_animated);
+			// Create map instance
+			var chart = am4core.create('chartdiv', am4maps.MapChart);
+			// Set map definition
+			chart.geodata = am4geodata_worldLow;
+			chart.paddingBottom = 20;
+			chart.paddingTop = 20;
+			chart.paddingLeft = 20;
+			chart.paddingRight = 20;
+			//地图投影类型：
+			//EqualEarth、Orthographic、NaturalEarth1、Mercator、Albers、Eckert6、Miller
+			//AzimuthalEqualArea、Projection、Stereographic
+			chart.projection = new am4maps.projections.AzimuthalEqualArea();
+			chart.panBehavior = 'rotateLong'; // 拖拽旋转地球		rotateLongLat	
+			// 海洋背景（球体内部灰色）
+			chart.backgroundSeries.mapPolygons.template.polygon.fill = am4core.color('#999');
+			chart.backgroundSeries.mapPolygons.template.polygon.fillOpacity = 0.1; // 普通经纬网格
+			var graticuleSeries = chart.series.push(new am4maps.GraticuleSeries());
+			graticuleSeries.fitExtent = false;
+			graticuleSeries.mapLines.template.stroke = am4core.color('#000');
+			// graticuleSeries.mapLines.template.strokeWidth = 2;
+			// graticuleSeries.mapLines.template.strokeOpacity = 0.5;
+			graticuleSeries.longitudeStep = 30; // ← 这就是设置间隔的核心代码
+			graticuleSeries.latitudeStep = 30; // ← 这就是设置间隔的核心代码
+			// 陆地系列（你原来的）
+			var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+			polygonSeries.useGeodata = true;
+			// 地图样式
+			var polygonTemplate = polygonSeries.mapPolygons.template;
+			polygonTemplate.fill = am4core.color('#aaa');
+			polygonTemplate.stroke = am4core.color('#ffffff');
+			polygonTemplate.strokeWidth = 0.5;
+			polygonTemplate.tooltipText = '{name}';
+			// 地图激活时
+			var active = polygonTemplate.states.create('active');
+			active.properties.fill = am4core.color('#585');
+			// 地图悬停时
+			var hover = polygonTemplate.states.create('hover');
+			hover.properties.fill = am4core.color('#585');
+			// 绑定点击事件到每个国家多边形
+			var previousPolygon;
+			polygonTemplate.events.on('hit', function(ev) {
+				var data = ev.target.dataItem.dataContext; // 这是国家完整数据对象
+				let target = ev.target;
+				if (previousPolygon && previousPolygon != target) {
+					previousPolygon.isActive = false;
+				}
+				target.isActive = true;
+				selectCountry(data.id);
+				previousPolygon = target;
+			});
+			// console.log(Object.keys(am4core.ease));
+			function selectCountry(id) {
+				let long = id == 'RU' ? 90 : 0;
+				var dataItem = polygonSeries.getPolygonById(id);
+				if (dataItem) {
+					dataItem.isActive = true;
+					chart.animate({
+						property: 'deltaLongitude',
+						to: -dataItem.longitude - long
+					}, 500, am4core.ease.circleInOut);
+					// chart.animate({
+					// 	property: 'deltaLatitude',
+					// 	to: -dataItem.latitude + 8
+					// }, 500, am4core.ease.circleInOut);
+					previousPolygon = dataItem;
+				}
+			}
+			// 初始化地图： 默认选择国家
+			chart.events.on('ready', function() {
+				selectCountry('CN');
+			});
+			// Export
+			chart.exporting.menu = new am4core.ExportMenu();
+			chart.exporting.adapter.add('data', function(data) {
+				data.data = [];
+				for (var i = 0; i < polygonSeries.data.length; i++) {
+					var row = polygonSeries.data[i];
+					data.data.push({
+						id: row.id,
+						value: row.value
+					});
+				}
+				return data;
+			});
+			// chart.appear(1000, 100);
+		</script>
+	</body>
+</html>
