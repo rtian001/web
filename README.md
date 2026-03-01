@@ -49,6 +49,18 @@ https://gh.llkk.cc/https://raw.githubusercontent.com/tushen6/Tomorrow/master/tvb
 - （15）星辰：https://fmbox.cc 
 - （16）林中小屋：https://8815.kstore.vip/tvbox/Ace
 - （17）潇洒：https://9877.kstore.space/AnotherD/api.json
+- 其他：
+http://cdn.qiaoji8.com/tvbox.json
+http://肥猫.com
+https://宝盒接口.top
+http://影视仓接口.top
+http://7337.kstore.space/qxys/禁止传播.json
+http://mzrjk.top/唱戏
+http://mzrjk.top/智教
+http://mzrjk.top/听歌
+http://ok321.top/tv
+http://pandown.pro/tvbox/tvbox.json
+https://tv.xn--yhqu5zs87a.top
 
 ## 🔰影视软件下载地址
 - [OK影视下载地址](https://pan.quark.cn/s/98112b510599)
